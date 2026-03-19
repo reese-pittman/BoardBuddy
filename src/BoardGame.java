@@ -47,14 +47,14 @@ public class BoardGame {
      * @param sImage
      */
     public void setImage(String sImage) {
-        name = sImage;
+        image = sImage;
     }
     /**
      * 
      * @param sThumbnail
      */
     public void setThumbnail(String sThumbnail) {
-        name = sThumbnail;
+        thumbnail = sThumbnail;
     }
 
     private String id;
