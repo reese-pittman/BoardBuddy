@@ -1,60 +1,66 @@
 public class BoardGame {
 
-    /**
-     * 
-     * @param sId
-     */
-    public void setId(String sId) {
-        id = sId;
+    public BoardGame() {}
+
+    public BoardGame(String id, String name, int minPlayers, int maxPlayers, int playTime, int year, String image, String thumbnail) {
+        this.id = id;
+        this.name = name;
+        this.minPlayers = minPlayers;
+        this.maxPlayers = maxPlayers;
+        this.playTime = playTime;
+        this.year = year;
+        this.image = image;
+        this.thumbnail = thumbnail;
     }
-    /**
-     * 
-     * @param sName
-     */
-    public void setName(String sName) {
-        name = sName;
+
+    public void setId(String id) {
+        this.id = id;
     }
-    /**
-     * 
-     * @param sMin
-     */
-    public void setMin(int sMin) {
-        minPlayers = sMin;
+    public void setName(String name) {
+        this.name = name;
     }
-    /**
-     * 
-     * @param sMax
-     */
-    public void setMax(int sMax) {
-        maxPlayers = sMax;
+    public void setMin(int minPlayers) {
+        this.minPlayers = minPlayers;
     }
-    /**
-     * 
-     * @param sPlay
-     */
-    public void setPlay(int sPlay) {
-        playTime = sPlay;
+    public void setMax(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
-    /**
-     * 
-     * @param sYear
-     */
-    public void setYear(int sYear) {
-        year = sYear;
+    public void setPlay(int playTime) {
+        this.playTime = playTime;
     }
-    /**
-     * 
-     * @param sImage
-     */
-    public void setImage(String sImage) {
-        image = sImage;
+    public void setYear(int year) {
+        this.year = year;
     }
-    /**
-     * 
-     * @param sThumbnail
-     */
-    public void setThumbnail(String sThumbnail) {
-        thumbnail = sThumbnail;
+    public void setImage(String image) {
+        this.image = image;
+    }
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getMinPlayers() {
+        return minPlayers;
+    }
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+    public int getPlayTime() {
+        return playTime;
+    }
+    public int getYear() {
+        return year;
+    }
+    public String getImage() {
+        return image;
+    }
+    public String getThumbnail() {
+        return thumbnail;
     }
 
     private String id;
