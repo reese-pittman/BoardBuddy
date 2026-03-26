@@ -10,6 +10,8 @@ import org.w3c.dom.*;
  * and converts each entry into a boardgame object contained in a list.
  * </p>
  */
+
+
 public class InputXml {
     /**
      * Loads boardgames from xml input file.

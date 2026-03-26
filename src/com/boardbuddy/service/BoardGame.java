@@ -1,3 +1,5 @@
+package com.boardbuddy.service;
+
 public class BoardGame {
 
     public BoardGame() {}
