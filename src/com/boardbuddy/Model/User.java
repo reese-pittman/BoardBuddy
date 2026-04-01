@@ -6,13 +6,13 @@ import java.util.Collection;
 public class User {
     private String username;
     private String passwordHash; // may just be a password, but we may hash it
-    private ArrayList<Review> reviews; // May be here or on games
+    private int userID; // May be used for database purposes
     private ArrayList<Collection> gameCollections; // Users can have multiple collections of games
 
-    public User(String username, String passwordHash) {
+    public User(String username, String passwordHash, int userID) {
         this.username = username;
         this.passwordHash = passwordHash;
-        this.reviews = new ArrayList<>();
+        this.userID = userID; //(should be unique for each user)
         this.gameCollections = new java.util.ArrayList<>();
     }
 
