@@ -1,3 +1,4 @@
+package com.boardbuddy.Model;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,5 +37,9 @@ public class User {
 
     public void addGameCollection(Collection<Game> collection) {
         gameCollections.add(collection);
+    }
+
+    public ArrayList<Collection> getUsersCollections() {
+        return gameCollections;
     }
 }

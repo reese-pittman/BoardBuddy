@@ -1,4 +1,7 @@
+package com.boardbuddy.Model;
+
 import com.boardbuddy.Model.Game;
+import java.lang.reflect.Array;
 import java.util.ArrayList;;
 
 //this will handle the user data and information
@@ -16,6 +19,21 @@ public class Collection {
     // Getters
     public String getCollectionName() {
         return collectionName;
+    }
+
+    public Collection getCollection() {
+        return this;
+    }
+
+    public Game getGame(int index) {
+        if (index >= 0 && index < games.size()) {
+            return games.get(index);
+        }
+        return null; // or throw an exception
+    }
+
+    public ArrayList<Game> getGames() {
+        return games;
     }
 
     // Setters
