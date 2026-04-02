@@ -1,16 +1,15 @@
 package com.boardbuddy.ui;
 
-import com.boardbuddy.model.Game;
+import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.service.Dashboard;
-
-import javax.swing.*;
 import java.awt.*;
-import java.util.List;
+import java.util.ArrayList;
+import javax.swing.*;
 
-public class DashboardView extends JFrame {
+public class DashPanel extends JFrame {
 
     private final Dashboard dashboard;
-    private final List<Game> allDatabaseGames;
+    private final ArrayList<BoardGame> allDatabaseGames;
 
     private JTextField searchField;
     private JButton collectionsButton;
@@ -19,7 +18,7 @@ public class DashboardView extends JFrame {
     private JLabel titleLabel;
     private JPanel gamesPanel;
 
-    public DashboardView(Dashboard dashboard, List<Game> allDatabaseGames) {
+    public DashPanel(Dashboard dashboard, ArrayList<BoardGame> allDatabaseGames) {
         this.dashboard = dashboard;
         this.allDatabaseGames = allDatabaseGames;
 
@@ -74,7 +73,7 @@ public class DashboardView extends JFrame {
         // ─── Event Handlers ─────────────────────────────────────
         searchField.addActionListener(e -> {
             String query = searchField.getText();
-            List<Game> filteredGames = dashboard.onSearch(query, allDatabaseGames);
+            ArrayList<BoardGame> filteredGames = dashboard.onSearch(query, allDatabaseGames);
             titleLabel.setText(dashboard.getActiveCollectionName());
             loadGames(filteredGames);
         });
@@ -88,18 +87,18 @@ public class DashboardView extends JFrame {
         });
     }
 
-    private void loadGames(List<Game> games) {
+    private void loadGames(ArrayList<BoardGame> games) {
         gamesPanel.removeAll();
 
         if (games == null || games.isEmpty()) {
             gamesPanel.add(new JLabel("No games found."));
         } else {
-            for (Game game : games) {
+            for (BoardGame game : games) {
                 JButton gameButton = new JButton(game.getName());
                 gameButton.setPreferredSize(new Dimension(200, 100));
 
                 gameButton.addActionListener(e -> {
-                    Game selectedGame = dashboard.onGameSelected(game);
+                    BoardGame selectedGame = dashboard.onGameSelected(game);
                     openGameDetails(selectedGame);
                 });
 
@@ -118,13 +117,13 @@ public class DashboardView extends JFrame {
         );
 
         if (collectionName != null && !collectionName.trim().isEmpty()) {
-            List<Game> games = dashboard.onCollectionSelected(collectionName, allDatabaseGames);
+            ArrayList<BoardGame> games = dashboard.onCollectionSelected(collectionName, allDatabaseGames);
             titleLabel.setText(dashboard.getActiveCollectionName());
             loadGames(games);
         }
     }
 
-    private void openGameDetails(Game game) {
+    private void openGameDetails(BoardGame game) {
         if (game == null) {
             return;
         }
