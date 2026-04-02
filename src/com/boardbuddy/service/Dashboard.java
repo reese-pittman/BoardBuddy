@@ -3,18 +3,16 @@ package com.boardbuddy.service;
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.User;
 import com.boardbuddy.model.Collection;
-import java.lang.reflect.Array;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Dashboard {
 
     private Collection activeCollection;
-    private List<Collection> usersCollections;
-    private User user;
+    private final ArrayList<Collection> usersCollections;
+    private final User user;
     private String activeSearchQuery = "";
 
     public Dashboard(User user) {
@@ -88,7 +86,7 @@ public class Dashboard {
     /**
      * Called when user searches.
      */
-    public ArrayList<BoardGame> onSearch(String query, ArrayList<Game> allDatabaseGames) {
+    public ArrayList<BoardGame> onSearch(String query, ArrayList<BoardGame> allDatabaseGames) {
         this.activeSearchQuery = (query == null) ? "" : query.trim().toLowerCase();
         return getDashboardGames(allDatabaseGames);
     }
@@ -96,7 +94,7 @@ public class Dashboard {
     /**
      * Called when the user selects a collection by name.
      */
-    public ArrayList<BoardGame> onCollectionSelected(String collectionName, ArrayList<Game> allDatabaseGames) {
+    public ArrayList<BoardGame> onCollectionSelected(String collectionName, ArrayList<BoardGame> allDatabaseGames) {
         if (collectionName == null || usersCollections == null) {
             return getDashboardGames(allDatabaseGames);
         }
@@ -124,11 +122,11 @@ public class Dashboard {
      * Temporary version until persistence exists.
      * Just updates the object in memory.
      */
-    public void recordPlay(BoardGame game) {
-        if (game != null) {
-            game.incrementPlays();
-        }
-    }
+    // public void recordPlay(BoardGame game) {
+    //     if (game != null) {
+    //         game.incrementPlays();
+    //     }
+    // }
 
     private ArrayList<BoardGame> applySearchFilter(ArrayList<BoardGame> games) {
         if (games == null) {
@@ -140,9 +138,10 @@ public class Dashboard {
         }
 
         // Filter games based on search query (case-insensitive)
-        return games.stream()
-                .filter(game -> game != null && game.getName() != null && game.getName().toLowerCase().contains(activeSearchQuery))
-                .collect(Collectors.toList());
+        // return games.stream()
+        //         .filter(game -> game != null && game.getName() != null && game.getName().toLowerCase().contains(activeSearchQuery))
+        //         .collect(Collectors.toList());
+        return null;
     }
 
     // Utility method to get random games from the database
@@ -154,6 +153,7 @@ public class Dashboard {
         List<BoardGame> copy = new ArrayList<>(allGames);
         Collections.shuffle(copy);
 
-        return copy.stream().limit(limit).collect(Collectors.toList());
+        // return copy.stream().limit(limit).collect(Collectors.toList());
+        return null;
     }
 }
