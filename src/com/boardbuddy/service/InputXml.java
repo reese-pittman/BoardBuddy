@@ -1,9 +1,8 @@
-package com.boardbuddy;
+package com.boardbuddy.service;
 
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
-import com.boardbuddy.service.BoardGame;
- 
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -69,14 +68,13 @@ public class InputXml {
         for (int i = 0; i < itemNodes.getLength(); i++) {
             Element el = (Element) itemNodes.item(i);
  
-            // Skip expansions and other non-boardgame types
-            ///////// MAY CHANGE THIS
-            /// 
-            String type = el.getAttribute("type");
-            if (!type.equals("boardgame")) {
-                System.out.println("Skipping item of type \"" + type + "\".");
-                continue;
-            }
+            // TODO: Exlcludes non-boardgame types; I do not think we should exclude them right now.
+            // // Skip expansions and other non-boardgame types
+            // String type = el.getAttribute("type");
+            // if (!type.equals("boardgame")) {
+            //     System.out.println("Skipping item of type \"" + type + "\".");
+            //     continue;
+            // }
  
             String id = el.getAttribute("id");
             String name = getValueAttribute(el, "name");

@@ -13,12 +13,21 @@ public class Review {
 
     public static List<Review> reviewList = new ArrayList<>();
 
+    /**
+     * Contructs a review object given the parameters.
+     * 
+     * @param title
+     * @param description
+     * @param rating
+     * @param userID
+     * @param gameName
+     */
     public Review(String title, String description, int rating, int userID, String gameName) {
         this.Title = title;
         this.Description = description;
         this.rating = rating;
         this.userID = userID;
-        this.gameName = gameName;
+        this.gameName = gameName; // TODO: Consider using a gameID in stead of the gameName
     }
 
     /**
