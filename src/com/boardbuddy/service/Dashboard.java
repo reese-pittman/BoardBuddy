@@ -115,6 +115,7 @@ public class Dashboard {
      * Called when user clicks a game.
      */
     public BoardGame onGameSelected(BoardGame game) {
+        // TODO: Call gameview instead
         return game;
     }
 
