@@ -11,7 +11,7 @@ import com.boardbuddy.ui.DashPanel;
 // import com.boardbuddy.ui.GameView;
 
 // others
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
@@ -33,19 +33,19 @@ public class Main {
         /**
          * Importing Collection and printing gamelist
          */
-        Collection result = InputXml.parse(inputPath, "TestCollection", -1);
+        Collection masterCollection = InputXml.parse(inputPath, "Master", -1);
 
-        if (result == null) {
+        if (masterCollection == null) {
             System.out.println("failure");
             return;
         }
 
-        List<BoardGame> games = result.getGameList();
-                System.out.println("Collection: " + result.getCollectionName());
-        System.out.println("Games found: " + games.size());
+        ArrayList<BoardGame> masterList = masterCollection.getGameList();
+                System.out.println("Collection: " + masterCollection.getCollectionName());
+        System.out.println("Games found: " + masterList.size());
         System.out.println("---");
  
-        for (BoardGame game : games) {
+        for (BoardGame game : masterList) {
             System.out.println("Name:        " + game.getName());
             System.out.println("ID:          " + game.getId());
             System.out.println("Year:        " + game.getYear());
@@ -64,7 +64,7 @@ public class Main {
             User testUser = new User("test","pass", -1);
             Dashboard testDash = new Dashboard(testUser);
 
-            DashPanel panel = new DashPanel(testDash,result.getGameList());
+            DashPanel panel = new DashPanel(testDash,masterList);
 
             panel.setVisible(true);
 
