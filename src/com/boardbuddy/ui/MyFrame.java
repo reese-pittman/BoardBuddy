@@ -17,6 +17,7 @@ import com.boardbuddy.persistence.UserXml;
 
 class MyFrame extends JFrame implements ActionListener {
 
+
     private Container c;
     private JLabel title;
 
@@ -32,6 +33,7 @@ class MyFrame extends JFrame implements ActionListener {
     private JLabel genderLabel;
     private JRadioButton male;
     private JRadioButton female;
+    private JRadioButton attackchopper;
     private ButtonGroup gengp;
 
     private JLabel dobLabel;
@@ -193,9 +195,16 @@ class MyFrame extends JFrame implements ActionListener {
         female.setLocation(FIELD_X + 80, 260);
         c.add(female);
 
+        // attackchopper = new JRadioButton("Attack Chopper");
+        // attackchopper.setFont(new Font("Arial", Font.PLAIN, 15));
+        // attackchopper.setSize(80, 20);
+        // attackchopper.setLocation(FIELD_X + 80, 260);
+        // c.add(attackchopper);
+
         gengp = new ButtonGroup();
         gengp.add(male);
         gengp.add(female);
+        // gengp.add(attackchopper);
 
         // --- Date of Birth ---
         dobLabel = new JLabel("DOB");
@@ -244,6 +253,51 @@ class MyFrame extends JFrame implements ActionListener {
         res.setSize(500, 25);
         res.setLocation(200, 450);
         c.add(res);
+
+        // // --- Dark mode ---
+        // Color bg = new Color(0x19, 0x1a, 0x1c);
+        // Color fieldBg = new Color(0x2b, 0x2b, 0x2b);
+        // Color fg = Color.WHITE;
+ 
+        // c.setBackground(bg);
+ 
+        // title.setForeground(fg);
+        // usernameLabel.setForeground(fg);
+        // passwordLabel.setForeground(fg);
+        // confirmPasswordLabel.setForeground(fg);
+        // genderLabel.setForeground(fg);
+        // dobLabel.setForeground(fg);
+        // res.setForeground(fg);
+ 
+        // tusername.setBackground(fieldBg);
+        // tusername.setForeground(fg);
+        // tusername.setCaretColor(fg);
+ 
+        // tpass.setBackground(fieldBg);
+        // tpass.setForeground(fg);
+        // tpass.setCaretColor(fg);
+ 
+        // tconfirm.setBackground(fieldBg);
+        // tconfirm.setForeground(fg);
+        // tconfirm.setCaretColor(fg);
+ 
+        // male.setBackground(bg);
+        // male.setForeground(fg);
+        // female.setBackground(bg);
+        // female.setForeground(fg);
+        // // attackchopper.setForeground(fg);
+ 
+        // date.setBackground(fieldBg);
+        // date.setForeground(fg);
+        // month.setBackground(fieldBg);
+        // month.setForeground(fg);
+        // year.setBackground(fieldBg);
+        // year.setForeground(fg);
+ 
+        // sub.setBackground(fieldBg);
+        // sub.setForeground(fg);
+        // reset.setBackground(fieldBg);
+        // reset.setForeground(fg);
 
         setVisible(true);
     }
