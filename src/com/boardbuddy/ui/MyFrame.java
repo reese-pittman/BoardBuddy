@@ -4,6 +4,17 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import com.boardbuddy.model.User;
+import com.boardbuddy.persistence.UserXml;
+
+
+// This program creates a user when the fields are entered and writes and reads them from an XML
+
+// Registration Form → User object → XMLParser → users.xml file
+//                                                     ↑
+// Login Screen --------------------------------reads from here
+
+
 class MyFrame extends JFrame implements ActionListener {
 
     private Container c;
@@ -263,7 +274,17 @@ class MyFrame extends JFrame implements ActionListener {
             res.setForeground(new Color(0, 150, 0));
             res.setText("Registration successful!");
 
-            // TODO: save user via XMLParser
+            // This part writes to the xml file after clicking submit
+            try {
+                UserXml userXml = new UserXml();
+                User newUser = new User(username, password, 0);
+                userXml.saveUser(newUser);
+            } 
+
+            catch (Exception ex) {
+                res.setForeground(Color.RED);
+                res.setText("Error saving user.");
+            }
 
         } else if (e.getSource() == reset) {
             tusername.setText("");

@@ -1,4 +1,4 @@
-import com.boardbuddy.Model.Game;
+import com.boardbuddy.model.Game;
 import java.util.ArrayList;;
 
 //this will handle the user data and information
