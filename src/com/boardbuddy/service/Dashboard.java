@@ -6,7 +6,6 @@ import com.boardbuddy.model.Collection;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Dashboard {
 
@@ -115,6 +114,7 @@ public class Dashboard {
      * Called when user clicks a game.
      */
     public BoardGame onGameSelected(BoardGame game) {
+        // TODO: Call gameview instead
         return game;
     }
 
@@ -150,7 +150,7 @@ public class Dashboard {
             return new ArrayList<>();
         }
 
-        List<BoardGame> copy = new ArrayList<>(allGames);
+        ArrayList<BoardGame> copy = new ArrayList<>(allGames);
         Collections.shuffle(copy);
 
         // return copy.stream().limit(limit).collect(Collectors.toList());
