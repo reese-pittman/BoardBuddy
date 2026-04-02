@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/com/boardbuddy/Model/User.java
 package com.boardbuddy.Model;
+=======
+package com.boardbuddy.model;
+>>>>>>> origin:src/com/boardbuddy/model/User.java
 
 import java.util.ArrayList;
 import java.util.Collection;
