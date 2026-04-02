@@ -14,6 +14,7 @@ import java.io.File;
 public class InputXml {
 
     /**
+     * Parses the input file by calling a handler depending on what the file contains.
      * 
      * @param fileIn
      * @param collectionName
@@ -98,11 +99,11 @@ public class InputXml {
         for (int i = 0; i < reviewNodes.getLength(); i++) {
             Element el = (Element) reviewNodes.item(i);
  
-            String title       = getTextContent(el, "title");
+            String title = getTextContent(el, "title");
             String description = getTextContent(el, "description");
-            int rating         = parseTextContent(el, "rating");
-            int userID         = parseTextContent(el, "userID");
-            int gameID    = Integer.parseInt(getTextContent(el, "id"));
+            int rating = parseTextContent(el, "rating");
+            int userID = parseTextContent(el, "userID");
+            int gameID = Integer.parseInt(getTextContent(el, "id"));
  
             Review review = new Review(title, description, rating, userID, gameID);
             Review.addReview(review);

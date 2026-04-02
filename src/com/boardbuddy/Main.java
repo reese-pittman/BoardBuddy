@@ -16,9 +16,12 @@ import java.util.List;
  */
 public class Main {
 
+    /**
+     * Testing main
+     * @param args
+     */
     public static void main(String[] args) {
         
-        // Testing for now
         String inputPath = "bgg90Games.xml";
 
         /**
