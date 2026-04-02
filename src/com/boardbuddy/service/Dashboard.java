@@ -1,19 +1,18 @@
 package com.boardbuddy.service;
 
-import com.boardbuddy.model.Game;
-import com.boardbuddy.Model.User;
-import com.boardbuddy.Model.Collection;
-import java.lang.reflect.Array;
+import com.boardbuddy.model.BoardGame;
+import com.boardbuddy.model.User;
+import com.boardbuddy.model.Collection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Dashboard {
 
     private Collection activeCollection;
-    private List<Collection> usersCollections;
-    private User user;
+    private final ArrayList<Collection> usersCollections;
+    private final User user;
     private String activeSearchQuery = "";
 
     public Dashboard(User user) {
@@ -60,8 +59,8 @@ public class Dashboard {
      * If active collection has games, return those.
      * Otherwise return random games from all available database games.
      */
-    public ArrayList<Game> getDashboardGames(ArrayList<Game> allDatabaseGames) {
-        ArrayList<Game> baseGames;
+    public ArrayList<BoardGame> getDashboardGames(ArrayList<BoardGame> allDatabaseGames) {
+        ArrayList<BoardGame> baseGames;
 
         if (activeCollection != null &&
             activeCollection.getGames() != null &&
@@ -87,7 +86,7 @@ public class Dashboard {
     /**
      * Called when user searches.
      */
-    public ArrayList<Game> onSearch(String query, ArrayList<Game> allDatabaseGames) {
+    public ArrayList<BoardGame> onSearch(String query, ArrayList<BoardGame> allDatabaseGames) {
         this.activeSearchQuery = (query == null) ? "" : query.trim().toLowerCase();
         return getDashboardGames(allDatabaseGames);
     }
@@ -95,7 +94,7 @@ public class Dashboard {
     /**
      * Called when the user selects a collection by name.
      */
-    public ArrayList<Game> onCollectionSelected(String collectionName, ArrayList<Game> allDatabaseGames) {
+    public ArrayList<BoardGame> onCollectionSelected(String collectionName, ArrayList<BoardGame> allDatabaseGames) {
         if (collectionName == null || usersCollections == null) {
             return getDashboardGames(allDatabaseGames);
         }
@@ -115,7 +114,7 @@ public class Dashboard {
     /**
      * Called when user clicks a game.
      */
-    public Game onGameSelected(Game game) {
+    public BoardGame onGameSelected(BoardGame game) {
         return game;
     }
 
@@ -123,13 +122,13 @@ public class Dashboard {
      * Temporary version until persistence exists.
      * Just updates the object in memory.
      */
-    public void recordPlay(Game game) {
-        if (game != null) {
-            game.incrementPlays();
-        }
-    }
+    // public void recordPlay(BoardGame game) {
+    //     if (game != null) {
+    //         game.incrementPlays();
+    //     }
+    // }
 
-    private ArrayList<Game> applySearchFilter(ArrayList<Game> games) {
+    private ArrayList<BoardGame> applySearchFilter(ArrayList<BoardGame> games) {
         if (games == null) {
             return new ArrayList<>();
         }
@@ -139,20 +138,22 @@ public class Dashboard {
         }
 
         // Filter games based on search query (case-insensitive)
-        return games.stream()
-                .filter(game -> game != null && game.getName() != null && game.getName().toLowerCase().contains(activeSearchQuery))
-                .collect(Collectors.toList());
+        // return games.stream()
+        //         .filter(game -> game != null && game.getName() != null && game.getName().toLowerCase().contains(activeSearchQuery))
+        //         .collect(Collectors.toList());
+        return null;
     }
 
     // Utility method to get random games from the database
-    private ArrayList<Game> getRandomGames(ArrayList<Game> allGames, int limit) {
+    private ArrayList<BoardGame> getRandomGames(ArrayList<BoardGame> allGames, int limit) {
         if (allGames == null || allGames.isEmpty()) {
             return new ArrayList<>();
         }
 
-        List<Game> copy = new ArrayList<>(allGames);
+        List<BoardGame> copy = new ArrayList<>(allGames);
         Collections.shuffle(copy);
 
-        return copy.stream().limit(limit).collect(Collectors.toList());
+        // return copy.stream().limit(limit).collect(Collectors.toList());
+        return null;
     }
 }
