@@ -1,8 +1,8 @@
 package com.boardbuddy;
 
+import com.boardbuddy.model.BoardGame;
 // Temp imports
 import com.boardbuddy.model.Collection;
-import com.boardbuddy.service.BoardGame;
 import com.boardbuddy.service.InputXml;
 
 // View classes, should be what we actually need since the view classes will access everything else.

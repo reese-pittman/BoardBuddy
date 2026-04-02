@@ -1,4 +1,4 @@
-package com.boardbuddy.service;
+package com.boardbuddy.model;
 
 public class BoardGame {
 

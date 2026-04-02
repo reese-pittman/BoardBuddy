@@ -1,7 +1,5 @@
 package com.boardbuddy.model;
 
-import com.boardbuddy.service.BoardGame;
-
 import java.util.ArrayList;
 import java.util.List;
 

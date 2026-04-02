@@ -1,5 +1,6 @@
 package com.boardbuddy.service;
 
+import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
 
