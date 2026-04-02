@@ -9,7 +9,7 @@ public class Review {
     private String Description; 
     private int rating;
     private int userID; // used to link the review to a user
-    private String gameName; // used to link the review to a game
+    private int gameID; // used to link the review to a game
 
     public static List<Review> reviewList = new ArrayList<>();
 
@@ -20,14 +20,14 @@ public class Review {
      * @param description
      * @param rating
      * @param userID
-     * @param gameName
+     * @param gameID
      */
-    public Review(String title, String description, int rating, int userID, String gameName) {
+    public Review(String title, String description, int rating, int userID, int gameID) {
         this.Title = title;
         this.Description = description;
         this.rating = rating;
         this.userID = userID;
-        this.gameName = gameName; // TODO: Consider using a gameID in stead of the gameName
+        this.gameID = gameID; 
     }
 
     /**
@@ -41,13 +41,13 @@ public class Review {
     
     /**
      * 
-     * @param request
-     * @return
+     * @param request The gameID of the desired game
+     * @return Returns a list of all reviews matching the desired gameID.
      */
-    public static List<Review> fetchReviews(String request){
+    public static List<Review> fetchReviews(int request){
         List<Review> requestedList = new ArrayList<>();
         for (Review review : reviewList) {
-            if (review.getGameName().equals(request)) {
+            if (review.getGameID() == request) {
                 requestedList.add(review);
             }
         }
@@ -68,8 +68,8 @@ public class Review {
     public void setUserID(int userID) {
         this.userID = userID;
     }
-    public void setGameName(String gameName) {
-        this.gameName = gameName;
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
     }
 
     // Getters
@@ -85,7 +85,7 @@ public class Review {
     public int getUserID() {
         return userID;
     }
-    public String getGameName() {
-        return gameName;
+    public int getGameID() {
+        return gameID;
     }
 }

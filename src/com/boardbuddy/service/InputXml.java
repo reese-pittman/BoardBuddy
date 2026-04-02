@@ -47,7 +47,7 @@ public class InputXml {
             
         } catch (Exception e) {
             System.err.println("Fialed to parse XML file: " + e.getMessage());
-            e.printStackTrace();
+            // e.printStackTrace(); // used for testing
         }
         return null;
     }
@@ -68,15 +68,7 @@ public class InputXml {
         for (int i = 0; i < itemNodes.getLength(); i++) {
             Element el = (Element) itemNodes.item(i);
  
-            // TODO: Exlcludes non-boardgame types; I do not think we should exclude them right now.
-            // // Skip expansions and other non-boardgame types
-            // String type = el.getAttribute("type");
-            // if (!type.equals("boardgame")) {
-            //     System.out.println("Skipping item of type \"" + type + "\".");
-            //     continue;
-            // }
- 
-            String id = el.getAttribute("id");
+            int id = Integer.parseInt(el.getAttribute("id"));
             String name = getValueAttribute(el, "name");
             int minPlayers = parseValueAttribute(el, "minplayers");
             int maxPlayers = parseValueAttribute(el, "maxplayers");
@@ -110,9 +102,9 @@ public class InputXml {
             String description = getTextContent(el, "description");
             int rating         = parseTextContent(el, "rating");
             int userID         = parseTextContent(el, "userID");
-            String gameName    = getTextContent(el, "gameName");
+            int gameID    = Integer.parseInt(getTextContent(el, "id"));
  
-            Review review = new Review(title, description, rating, userID, gameName);
+            Review review = new Review(title, description, rating, userID, gameID);
             Review.addReview(review);
             count++;
         }
