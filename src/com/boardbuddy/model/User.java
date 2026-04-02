@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/com/boardbuddy/Model/User.java
-package com.boardbuddy.Model;
-=======
 package com.boardbuddy.model;
->>>>>>> origin:src/com/boardbuddy/model/User.java
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,10 +32,10 @@ public class User {
 
     //Just for creating a new array and then adding the new review to
     public void addReview(Review review) {
-        reviews.add(review);
+        Review.reviewList.add(review);
     }
 
-    public void addGameCollection(Collection<Game> collection) {
+    public void addGameCollection(Collection<BoardGame> collection) {
         gameCollections.add(collection);
     }
 
