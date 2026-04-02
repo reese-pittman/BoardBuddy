@@ -1,5 +1,6 @@
-import javax.swing.*;
+import com.boardbuddy.model.User;
 
+import javax.swing.*;
 
 public class ProfilePanel extends JPanel {
     public ProfilePanel(User user, Profile profile) {

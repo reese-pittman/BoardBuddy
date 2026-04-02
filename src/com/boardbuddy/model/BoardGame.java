@@ -1,10 +1,10 @@
-package com.boardbuddy.service;
+package com.boardbuddy.model;
 
 public class BoardGame {
 
     public BoardGame() {}
 
-    public BoardGame(String id, String name, int minPlayers, int maxPlayers, int playTime, int year, String image, String thumbnail) {
+    public BoardGame(int id, String name, int minPlayers, int maxPlayers, int playTime, int year, String image, String thumbnail) {
         this.id = id;
         this.name = name;
         this.minPlayers = minPlayers;
@@ -15,7 +15,7 @@ public class BoardGame {
         this.thumbnail = thumbnail;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     public void setName(String name) {
@@ -40,7 +40,7 @@ public class BoardGame {
         this.thumbnail = thumbnail;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
     public String getName() {
@@ -65,7 +65,7 @@ public class BoardGame {
         return thumbnail;
     }
 
-    private String id;
+    private int id;
     private String name;
     private int minPlayers;
     private int maxPlayers;
