@@ -1,7 +1,6 @@
 package com.boardbuddy;
 
 import com.boardbuddy.model.BoardGame;
-// Temp imports
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.service.Dashboard;
@@ -14,14 +13,14 @@ import com.boardbuddy.ui.DashPanel;
 // others
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 /**
  * Main Program
  */
 public class Main {
+
+    
 
     /**
      * Testing main
