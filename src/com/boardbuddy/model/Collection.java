@@ -1,7 +1,15 @@
+<<<<<<< HEAD:src/com/boardbuddy/Model/Collection.java
+package com.boardbuddy.Model;
+
+import com.boardbuddy.Model.Game;
+import java.lang.reflect.Array;
+import java.util.ArrayList;;
+=======
 package com.boardbuddy.model;
 
 import java.util.ArrayList;
 import java.util.List;
+>>>>>>> origin:src/com/boardbuddy/model/Collection.java
 
 //this will handle the user data and information
 public class Collection {
@@ -21,6 +29,21 @@ public class Collection {
     }
     public List<BoardGame> getGameList() {
         return gameList;
+    }
+
+    public Collection getCollection() {
+        return this;
+    }
+
+    public Game getGame(int index) {
+        if (index >= 0 && index < games.size()) {
+            return games.get(index);
+        }
+        return null; // or throw an exception
+    }
+
+    public ArrayList<Game> getGames() {
+        return games;
     }
 
     // Setters
