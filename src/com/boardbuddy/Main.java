@@ -3,13 +3,20 @@ package com.boardbuddy;
 import com.boardbuddy.model.BoardGame;
 // Temp imports
 import com.boardbuddy.model.Collection;
+import com.boardbuddy.model.User;
+import com.boardbuddy.service.Dashboard;
 import com.boardbuddy.service.InputXml;
+import com.boardbuddy.ui.DashPanel;
 
 // View classes, should be what we actually need since the view classes will access everything else.
 // import com.boardbuddy.ui.GameView;
 
 // others
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 
 /**
  * Main Program
@@ -48,6 +55,22 @@ public class Main {
             System.out.println("Thumbnail:   " + game.getThumbnail());
             System.out.println("---");
         }
+
+
+
+
+        // DASHBOARD
+        SwingUtilities.invokeLater(() -> {
+
+            User testUser = new User("test","pass", -1);
+            Dashboard testDash = new Dashboard(testUser);
+
+            DashPanel panel = new DashPanel(testDash,result.getGameList());
+
+            panel.setVisible(true);
+
+        });
+        
 
     }
 

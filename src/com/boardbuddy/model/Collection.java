@@ -19,7 +19,7 @@ public class Collection {
     public String getCollectionName() {
         return collectionName;
     }
-    public List<BoardGame> getGameList() {
+    public ArrayList<BoardGame> getGameList() {
         return gameList;
     }
 
