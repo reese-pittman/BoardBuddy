@@ -92,7 +92,10 @@ public class Dashboard {
      */
     public ArrayList<BoardGame> onSearch(String query, ArrayList<BoardGame> allDatabaseGames) {
         this.activeSearchQuery = (query == null) ? "" : query.trim().toLowerCase();
-        return getDashboardGames(allDatabaseGames);
+
+        ArrayList<BoardGame> filtered = applySearchFilter(allDatabaseGames);
+        filtered.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return filtered;
     }
 
     /**
@@ -129,16 +132,6 @@ public class Dashboard {
         sFrame.setLocationRelativeTo(null);
         sFrame.setVisible(true);
     }
-
-    /**
-     * Temporary version until persistence exists.
-     * Just updates the object in memory.
-     */
-    // public void recordPlay(BoardGame game) {
-    //     if (game != null) {
-    //         game.incrementPlays();
-    //     }
-    // }
 
     private ArrayList<BoardGame> applySearchFilter(ArrayList<BoardGame> games) {
         if (games == null) {
