@@ -1,11 +1,10 @@
 package com.boardbuddy.ui;
 
+import com.boardbuddy.model.User;
+import com.boardbuddy.persistence.UserXml;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import com.boardbuddy.model.User;
-import com.boardbuddy.persistence.UserXml;
 
 
 // This program creates a user when the fields are entered and writes and reads them from an XML
@@ -351,4 +350,11 @@ class MyFrame extends JFrame implements ActionListener {
             year.setSelectedItem("2000");
         }
     }
+
+    /* 
+    public static void main(String[] args) {
+        MyFrame f = new MyFrame();
+    }
+    */
+
 }
