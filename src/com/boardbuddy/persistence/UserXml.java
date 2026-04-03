@@ -104,7 +104,7 @@ public class UserXml {
      * @return null if username wasn't found in the file
      * @throws Exception
      */
-    public User loadUser(String username) throws Exception {
+    public static User loadUser(String username) throws Exception {
         File xmlFile = new File(FILE_PATH);
 
         if (!xmlFile.exists()) {
