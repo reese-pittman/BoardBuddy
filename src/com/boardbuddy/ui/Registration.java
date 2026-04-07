@@ -351,10 +351,10 @@ class MyFrame extends JFrame implements ActionListener {
         }
     }
 
-    /* 
+    // You can test the panel through running this function
     public static void main(String[] args) {
         MyFrame f = new MyFrame();
     }
-    */
+    
 
 }
