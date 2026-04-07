@@ -3,9 +3,12 @@ package com.boardbuddy.service;
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.User;
 import com.boardbuddy.model.Collection;
+import com.boardbuddy.ui.GameView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import javax.swing.JFrame;
 
 public class Dashboard {
 
@@ -67,8 +70,10 @@ public class Dashboard {
             baseGames = activeCollection.getGames();
         } else {
             baseGames = getRandomGames(allDatabaseGames, 10);
+            // baseGames = getRandomGames(allDatabaseGames, allDatabaseGames.size());
         }
 
+        // TODO: seach only searches through the 10 random games
         return applySearchFilter(baseGames);
     }
 
@@ -87,7 +92,10 @@ public class Dashboard {
      */
     public ArrayList<BoardGame> onSearch(String query, ArrayList<BoardGame> allDatabaseGames) {
         this.activeSearchQuery = (query == null) ? "" : query.trim().toLowerCase();
-        return getDashboardGames(allDatabaseGames);
+
+        ArrayList<BoardGame> filtered = applySearchFilter(allDatabaseGames);
+        filtered.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return filtered;
     }
 
     /**
@@ -113,35 +121,31 @@ public class Dashboard {
     /**
      * Called when user clicks a game.
      */
-    public BoardGame onGameSelected(BoardGame game) {
-        // TODO: Call gameview instead
-        return game;
-    }
+    public void onGameSelected(BoardGame game) {
+        GameView selected = new GameView(user.getUID(), game.getId());
+        selected.setGame(game);
 
-    /**
-     * Temporary version until persistence exists.
-     * Just updates the object in memory.
-     */
-    // public void recordPlay(BoardGame game) {
-    //     if (game != null) {
-    //         game.incrementPlays();
-    //     }
-    // }
+        JFrame sFrame = new JFrame(game.getName());
+        sFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        sFrame.add(selected);
+        sFrame.setSize(420,380);
+        sFrame.setLocationRelativeTo(null);
+        sFrame.setVisible(true);
+    }
 
     private ArrayList<BoardGame> applySearchFilter(ArrayList<BoardGame> games) {
         if (games == null) {
             return new ArrayList<>();
         }
 
-        if (activeSearchQuery == null || activeSearchQuery.isBlank()) {
-            return games;
+        ArrayList<BoardGame> filtered = new ArrayList<>();
+        for (BoardGame game : games) {
+            if (game != null && game.getName() != null && game.getName().toLowerCase().contains(activeSearchQuery)) {
+                filtered.add(game);
+            }
         }
 
-        // Filter games based on search query (case-insensitive)
-        // return games.stream()
-        //         .filter(game -> game != null && game.getName() != null && game.getName().toLowerCase().contains(activeSearchQuery))
-        //         .collect(Collectors.toList());
-        return null;
+        return filtered;
     }
 
     // Utility method to get random games from the database
@@ -153,7 +157,6 @@ public class Dashboard {
         ArrayList<BoardGame> copy = new ArrayList<>(allGames);
         Collections.shuffle(copy);
 
-        // return copy.stream().limit(limit).collect(Collectors.toList());
-        return null;
+        return new ArrayList<>(copy.subList(0, Math.min(limit, copy.size())));
     }
 }

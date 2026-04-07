@@ -2,6 +2,7 @@ package com.boardbuddy.ui;
 
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.service.Dashboard;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -98,8 +99,7 @@ public class DashPanel extends JFrame {
                 gameButton.setPreferredSize(new Dimension(200, 100));
 
                 gameButton.addActionListener(e -> {
-                    BoardGame selectedGame = dashboard.onGameSelected(game);
-                    openGameDetails(selectedGame);
+                    dashboard.onGameSelected(game);
                 });
 
                 gamesPanel.add(gameButton);
@@ -121,16 +121,7 @@ public class DashPanel extends JFrame {
             titleLabel.setText(dashboard.getActiveCollectionName());
             loadGames(games);
         }
+        
     }
 
-    private void openGameDetails(BoardGame game) {
-        if (game == null) {
-            return;
-        }
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Opening game: " + game.getName()
-        );
-    }
 }

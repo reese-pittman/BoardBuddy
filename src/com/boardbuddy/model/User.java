@@ -19,6 +19,9 @@ public class User {
     // Getters
     public String getUsername()     { return username; }
     public String getPasswordHash() { return passwordHash; }
+    public int getUID() {
+        return userID;
+    }
 
     //Setters
     public void setPasswordHash(String passwordHash) {
