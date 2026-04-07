@@ -2,24 +2,37 @@ package com.boardbuddy.service;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.ArrayList;
 
+import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.User;
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.ui.LoginPanel;
 import com.boardbuddy.persistence.UserXml;
 import com.boardbuddy.service.Dashboard;
+import com.boardbuddy.model.Collection;
 
 public class LoginBackend implements ActionListener {
 
     // Creates an instance of the loginPanel Class (GUI)
     private final LoginPanel GUI;
 
+    private final ArrayList<BoardGame> allDatabaseGames;
+
     // The constructor creates a composite relationship between the two classes. 
     // Final is used to 'force' this relationship
-    public LoginBackend(){
+    public LoginBackend() {
         this.GUI = new LoginPanel();
-    }
 
+        // loads games from xml
+        Collection collection = InputXml.parse("bgg3games.xml", "All Games", 0);
+        this.allDatabaseGames = (collection != null) ? collection.getGameList() : new ArrayList<>();
+
+        this.GUI.setLoginAction(this);
+        this.GUI.setVisible(true);
+    }
+    
     // called automatically when button is clicked
     public void actionPerformed(ActionEvent e) { 
         checkCredentials(GUI.getUsername(), GUI.getPassword());
@@ -51,9 +64,9 @@ public class LoginBackend implements ActionListener {
      * @param user the user object of the information that was entered 
      */
     public void openNewPage(User user) {
-        GUI.setVisible(false);
+       GUI.setVisible(false);
         Dashboard dashboard = new Dashboard(user);
-        DashPanel dashPanel = new DashPanel(dashboard, /* game list needed here */);
+        DashPanel dashPanel = new DashPanel(dashboard, allDatabaseGames); // loadGames is called automatically inside here
         dashPanel.setVisible(true);
     }
 
@@ -76,6 +89,5 @@ public class LoginBackend implements ActionListener {
             GUI.setFailMessage("Error loading user data");
         }
     }
-
 
 }
