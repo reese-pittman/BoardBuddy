@@ -9,14 +9,23 @@ import javax.swing.*;
 
 // This program creates a user when the fields are entered and writes and reads them from an XML
 
+
+// General logic for reference
+
 // Registration Form → User object → XMLParser → users.xml file
 //                                                     ↑
 // Login Screen --------------------------------reads from here
 
+/**
+ * Registration class contains all of the ui code for the display of the registration panel
+ */
 
-class MyFrame extends JFrame implements ActionListener {
+class Registration extends JFrame implements ActionListener {
 
 
+    /**
+     * Private variables starting at line 29 and ending at line 56 for use in buttons, fields, and dropdowns
+     */
     private Container c;
     private JLabel title;
 
@@ -29,6 +38,8 @@ class MyFrame extends JFrame implements ActionListener {
     private JLabel confirmPasswordLabel;
     private JPasswordField tconfirm;
 
+
+    // Gender is not saved to the xml
     private JLabel genderLabel;
     private JRadioButton male;
     private JRadioButton female;
@@ -44,17 +55,28 @@ class MyFrame extends JFrame implements ActionListener {
     private JButton reset;
     private JLabel res;
 
+
+    /**
+     * List of dates to populate dropdown
+     */
     private String[] dates = {
         "1","2","3","4","5","6","7","8","9","10",
         "11","12","13","14","15","16","17","18","19","20",
         "21","22","23","24","25","26","27","28","29","30","31"
     };
 
+
+    /**
+     * List of months to populate dropdown
+     */
     private String[] months = {
         "Jan","Feb","Mar","Apr","May","Jun",
         "Jul","Aug","Sep","Oct","Nov","Dec"
     };
 
+    /**
+     * List of years to populate dropdown, 1492 when America was found
+     */
     private String[] years = {
         "1492","1493","1494","1495","1496","1497","1498","1499","1500",
         "1501","1502","1503","1504","1505","1506","1507","1508","1509","1510",
@@ -112,14 +134,21 @@ class MyFrame extends JFrame implements ActionListener {
         "2021","2022","2023","2024","2025","2026"
     };
 
-    // Centering constants — tweak LABEL_X to shift everything left/right
+    // While date of birth and gender are fields in the panel, they do not save to the xml
+    //=========================================================================================
+
+    /** Centering constants — tweak LABEL_X to shift everything left/right */
     private static final int LABEL_X = 250;
     private static final int LABEL_W = 160;
     private static final int FIELD_X = 420;
     private static final int FIELD_W = 200;
     private static final int FIELD_H = 25;
 
-    public MyFrame() {
+    /**
+     * Public registration method including the functions for setting the registration panel up
+     */
+    public Registration() {
+        // Window title
         setTitle("Board Buddy - Register");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -253,7 +282,7 @@ class MyFrame extends JFrame implements ActionListener {
         res.setLocation(200, 450);
         c.add(res);
 
-        // // --- Dark mode ---
+        // // --- Dark mode --- (didn't align with the rest of our design language)
         // Color bg = new Color(0x19, 0x1a, 0x1c);
         // Color fieldBg = new Color(0x2b, 0x2b, 0x2b);
         // Color fg = Color.WHITE;
@@ -302,6 +331,10 @@ class MyFrame extends JFrame implements ActionListener {
     }
 
     @Override
+
+    /**
+     * public void method that applies action listeners to all the buttons. Essentially adds the logic behind the panel
+     */
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == sub) {
@@ -310,6 +343,7 @@ class MyFrame extends JFrame implements ActionListener {
             String password = new String(tpass.getPassword());
             String confirm  = new String(tconfirm.getPassword());
 
+            // If submit is pressed without filling the password or username
             if (username.isEmpty() || password.isEmpty()) {
                 res.setForeground(Color.RED);
                 res.setText("Username and password are required.");
@@ -353,7 +387,7 @@ class MyFrame extends JFrame implements ActionListener {
 
     // You can test the panel through running this function
     public static void main(String[] args) {
-        MyFrame f = new MyFrame();
+        Registration f = new Registration();
     }
     
 

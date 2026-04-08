@@ -46,7 +46,7 @@ public class UserXml {
 
             // Password sub sub dir under user
             Element password = doc.createElement("password");
-            // TODO: hash password before storing in production
+            // TODO: hash password before storing in production (this is a maybe, for now it is just a string)
             password.setTextContent(user.getPasswordHash());
             userElement.appendChild(password);
 
@@ -78,7 +78,7 @@ public class UserXml {
             Element password = doc.createElement("password");
 
 
-            // TODO: hash password before storing in production
+            // TODO: hash password before storing in production (this is a maybe, for now it is just a string)
 
 
             password.setTextContent(user.getPasswordHash());
