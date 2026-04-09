@@ -5,6 +5,7 @@ import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.service.Dashboard;
 import com.boardbuddy.service.InputXml;
+import com.boardbuddy.service.LoginBackend;
 import com.boardbuddy.ui.DashPanel;
 
 // View classes, should be what we actually need since the view classes will access everything else.
@@ -55,20 +56,8 @@ public class Main {
             System.out.println("---");
         }
 
+        LoginBackend startLogin = new LoginBackend(masterCollection);
 
-
-
-        // DASHBOARD
-        SwingUtilities.invokeLater(() -> {
-
-            User testUser = new User("test","pass", -1);
-            Dashboard testDash = new Dashboard(testUser);
-
-            DashPanel panel = new DashPanel(testDash,masterList);
-
-            panel.setVisible(true);
-
-        });
         
 
     }
