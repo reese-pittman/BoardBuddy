@@ -56,6 +56,8 @@ public class Main {
             System.out.println("---");
         }
 
+        // Start the chain to login -> dashboard
+        // Unused is okay
         LoginBackend startLogin = new LoginBackend(masterCollection);
 
         
