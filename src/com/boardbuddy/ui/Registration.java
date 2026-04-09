@@ -2,6 +2,7 @@ package com.boardbuddy.ui;
 
 import com.boardbuddy.model.User;
 import com.boardbuddy.persistence.UserXml;
+import com.boardbuddy.service.LoginBackend;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -53,6 +54,7 @@ class Registration extends JFrame implements ActionListener {
 
     private JButton sub;
     private JButton reset;
+    private JButton log;
     private JLabel res;
 
 
@@ -261,19 +263,32 @@ class Registration extends JFrame implements ActionListener {
         c.add(year);
 
         // --- Buttons ---
+
+        // Submit button
         sub = new JButton("Submit");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(100, 25);
-        sub.setLocation(330, 400);
+        sub.setLocation(270, 400);
         sub.addActionListener(this);
         c.add(sub);
 
+        // Reset button
         reset = new JButton("Reset");
         reset.setFont(new Font("Arial", Font.PLAIN, 15));
         reset.setSize(100, 25);
-        reset.setLocation(450, 400);
+        reset.setLocation(390, 400);
         reset.addActionListener(this);
         c.add(reset);
+
+
+        // Login button
+        log = new JButton("Login");
+        log.setFont(new Font("Arial", Font.PLAIN, 15));
+        log.setSize(100, 25);
+        log.setLocation(510, 400);
+        log.addActionListener(this);
+        c.add(log);
+
 
         // --- Status label ---
         res = new JLabel("");
@@ -336,6 +351,11 @@ class Registration extends JFrame implements ActionListener {
      * public void method that applies action listeners to all the buttons. Essentially adds the logic behind the panel
      */
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == log){
+            LoginBackend f = new LoginBackend();
+            setVisible(false);
+        }
 
         if (e.getSource() == sub) {
 
