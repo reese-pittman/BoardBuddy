@@ -19,12 +19,12 @@ public class LoginBackend implements ActionListener {
 
     // The constructor creates a composite relationship between the two classes. 
     // Final is used to 'force' this relationship
-    public LoginBackend() {
+    public LoginBackend(Collection master) {
         this.GUI = new LoginPanel();
 
         // loads games from xml
-        Collection collection = InputXml.parse("bgg3Games.xml", "All Games", 0);
-        this.allDatabaseGames = (collection != null) ? collection.getGameList() : new ArrayList<>();
+        // Collection collection = InputXml.parse("bgg3games.xml", "All Games", 0);
+        this.allDatabaseGames = (master != null) ? master.getGameList() : new ArrayList<>();
 
         this.GUI.setLoginAction(this);
         this.GUI.setVisible(true);
@@ -71,7 +71,7 @@ public class LoginBackend implements ActionListener {
 
     
 
-    
+
 
    
     /**   if the info is correct than the dashboard will open, else if

@@ -73,7 +73,6 @@ public class Dashboard {
             // baseGames = getRandomGames(allDatabaseGames, allDatabaseGames.size());
         }
 
-        // TODO: seach only searches through the 10 random games
         return applySearchFilter(baseGames);
     }
 
