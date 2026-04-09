@@ -3,14 +3,12 @@ package com.boardbuddy.service;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.ArrayList;
 
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.User;
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.ui.LoginPanel;
 import com.boardbuddy.persistence.UserXml;
-import com.boardbuddy.service.Dashboard;
 import com.boardbuddy.model.Collection;
 
 public class LoginBackend implements ActionListener {
