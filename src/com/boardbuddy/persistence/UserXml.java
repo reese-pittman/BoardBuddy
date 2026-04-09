@@ -8,6 +8,8 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
+// This program makes and/or appends to an xml file (users.xml) that login will later pull from to make its validations
+
 
 public class UserXml {
     private static final String FILE_PATH = "users.xml";

@@ -7,7 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-// This program creates a user when the fields are entered and writes and reads them from an XML
+// This program creates a user when the fields are entered and writes and reads them from an XML ●‿●
 
 
 // General logic for reference
