@@ -1,13 +1,11 @@
 package com.boardbuddy.service;
 
 import com.boardbuddy.model.BoardGame;
-import com.boardbuddy.model.User;
 import com.boardbuddy.model.Collection;
+import com.boardbuddy.model.User;
 import com.boardbuddy.ui.GameView;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javax.swing.JFrame;
 
 public class Dashboard {
@@ -121,7 +119,7 @@ public class Dashboard {
      * Called when user clicks a game.
      */
     public void onGameSelected(BoardGame game) {
-        GameView selected = new GameView(user.getUID(), game.getId());
+        GameView selected = new GameView(user, game.getId());
         selected.setGame(game);
 
         JFrame sFrame = new JFrame(game.getName());

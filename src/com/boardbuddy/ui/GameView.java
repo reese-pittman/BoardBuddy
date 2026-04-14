@@ -1,14 +1,18 @@
 package com.boardbuddy.ui;
 
-import javax.swing.*;
-import java.awt.*;
-
-import java.util.List;
-
 import com.boardbuddy.model.BoardGame;
+import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
+import com.boardbuddy.model.User;
+import java.awt.*;
+import java.util.List;
+import javax.swing.*;
 
 public class GameView extends JPanel {
+
+    private static User currentUser;
+    private BoardGame currentGame;
+    private final int uid;
 
     private final JLabel imageLabel;
     private final JLabel nameLabel;
@@ -24,7 +28,9 @@ public class GameView extends JPanel {
      * @param uid User ID to keep track of who is looking at a game and leaves reviews
      * @param game Current GameName to tie it to reviews/collections
      */
-    public GameView(int uid, int game) {
+    public GameView(User currentUser, int game) {
+        GameView.currentUser = currentUser;
+        uid = currentUser.getUID();
         setLayout(new BorderLayout(0, 12));
         setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
@@ -76,16 +82,80 @@ public class GameView extends JPanel {
         JButton leaveReviewButton = new JButton("Leave a Review");
         leaveReviewButton.addActionListener(e -> showReviewDialog(uid, game));
 
-        JPanel reviewBottom = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        reviewBottom.add(leaveReviewButton);
+        JButton addToCollection = new JButton("Add game to collection!");
+        addToCollection.addActionListener(e -> addCollectionDialog(addToCollection));
+
+        JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        bottomButtons.add(leaveReviewButton);
+        bottomButtons.add(addToCollection);
 
         reviewsSection.add(scrollPane, BorderLayout.CENTER);
-        reviewsSection.add(reviewBottom, BorderLayout.SOUTH);
+        reviewsSection.add(bottomButtons, BorderLayout.SOUTH);
 
         // ── Assemble ─────────────────────────────────────────────────────────
         add(topBar, BorderLayout.NORTH);
         add(infoRow, BorderLayout.CENTER);
         add(reviewsSection, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Show the options to add current game to a collection. 
+     * List all user's collections or add to a new collection.
+     * 
+     * @param uid
+     * @param game
+     */
+    private void addCollectionDialog(JButton anchor) {
+        if (currentGame == null) return;
+
+        java.util.ArrayList<Collection> collections = currentUser.getUsersCollections();
+
+        JPopupMenu menu = new JPopupMenu();
+
+        if (collections.isEmpty()) {
+            JMenuItem empty = new JMenuItem("No collectoins yet.");
+            empty.setEnabled(false);
+            menu.add(empty);
+        } else {
+            for (Collection collection : collections) {
+                if (collection == null) continue;
+                JMenuItem item = new JMenuItem(collection.getCollectionName());
+                item.addActionListener(e -> {
+                    collection.addGame(currentGame);
+                    JOptionPane.showMessageDialog(this, "\"" + currentGame.getName() + "\" added to \"" 
+                    + collection.getCollectionName() + "\".", "Added to Collection", JOptionPane.INFORMATION_MESSAGE
+                    );
+                });
+                menu.add(item);
+            }
+            menu.addSeparator();
+        }
+
+        // Add to a new collectoin option
+        JMenuItem newItem = new JMenuItem("+ New Collection");
+        newItem.addActionListener(e -> {
+            String name = JOptionPane.showInputDialog(
+                this,
+                "Enter a name for a new collection:",
+                "New Collection",
+                JOptionPane.PLAIN_MESSAGE
+            );
+            if (name != null && !name.trim().isEmpty()) {
+                Collection newCollection = new Collection(name.trim(), uid);
+                currentUser.addGameCollection(newCollection);
+                newCollection.addGame(currentGame);
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Collection \"" + name.trim() + "\" created and \"" + currentGame.getName()
+                    + "\" added.",
+                    "Collection Created",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        });
+        menu.add(newItem);
+
+        menu.show(anchor, 0, anchor.getHeight());
     }
 
     /**
@@ -191,6 +261,7 @@ public class GameView extends JPanel {
     }
 
     public void setGame(BoardGame game) {
+        this.currentGame = game;
         if (game == null) {
             nameLabel.setText("Name: —");
             yearLabel.setText("Year: —");
@@ -224,12 +295,16 @@ public class GameView extends JPanel {
             submitReview("GREAT BAD GAME","Catan is a great strategy game but I have no friends to play with.",
                 4, -1, 13);
 
-            int testUID = -1; int testGAME = catan.getId();
+            currentUser = new User("test", "pass", -1);
+            int testUID = currentUser.getUID() ;int testGAME = catan.getId();
+
+            Collection testCollection = new Collection("test", testUID);
+            currentUser.addGameCollection(testCollection);
 
             JFrame frame = new JFrame("Board Game Details");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            GameView panel = new GameView(testUID, testGAME);
+            GameView panel = new GameView(currentUser, testGAME);
             panel.setGame(catan);
 
             frame.add(panel);

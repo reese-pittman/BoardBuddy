@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
+                
+    
+    
+    <user>
+                                
+        
+        
+        <username>jimmy123</username>
+                                
+        
+        
+        <password>kp111</password>
+                            
+    
+    
+    </user>
             
+    
     
     <user>
                         
         
-        <username>jimmy123</username>
+        <username>commy2</username>
                         
         
-        <password>kp111</password>
+        <password>6767</password>
                     
     
     </user>
@@ -16,14 +33,14 @@
     
     <user>
                 
-        <username>commy2</username>
+        <username>beans</username>
                 
-        <password>6767</password>
+        <password>6969</password>
             
     </user>
     
     <user>
-        <username>beans</username>
-        <password>6969</password>
+        <username>test</username>
+        <password>pass</password>
     </user>
 </users>

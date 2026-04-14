@@ -1,7 +1,6 @@
 package com.boardbuddy.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 //this will handle the user data and information
 public class Collection {
@@ -21,6 +20,9 @@ public class Collection {
     }
     public ArrayList<BoardGame> getGameList() {
         return gameList;
+    }
+    public int getCollectionUID() {
+        return userID;
     }
 
     public Collection getCollection() {
@@ -46,6 +48,5 @@ public class Collection {
     public void addGame(BoardGame game) {
         gameList.add(game);
     }
-
 
 }

@@ -1,3 +1,5 @@
+package com.boardbuddy.ui;
+
 import com.boardbuddy.model.User;
 
 import javax.swing.*;

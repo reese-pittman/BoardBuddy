@@ -27,41 +27,41 @@ class Registration extends JFrame implements ActionListener {
     /**
      * Private variables starting at line 29 and ending at line 56 for use in buttons, fields, and dropdowns
      */
-    private Container c;
-    private JLabel title;
+    private final Container c;
+    private final JLabel title;
 
-    private JLabel usernameLabel;
-    private JTextField tusername;
+    private final JLabel usernameLabel;
+    private final JTextField tusername;
 
-    private JLabel passwordLabel;
-    private JPasswordField tpass;
+    private final JLabel passwordLabel;
+    private final JPasswordField tpass;
 
-    private JLabel confirmPasswordLabel;
-    private JPasswordField tconfirm;
+    private final JLabel confirmPasswordLabel;
+    private final JPasswordField tconfirm;
 
 
-    // Gender is not saved to the xml
-    private JLabel genderLabel;
-    private JRadioButton male;
-    private JRadioButton female;
-    private JRadioButton attackchopper;
-    private ButtonGroup gengp;
+    // Gendefinal r is not saved to the xml
+    private final JLabel genderLabel;
+    private final JRadioButton male;
+    private final JRadioButton female;
+    // private final JRadioButton attackchopper;
+    private final ButtonGroup gengp;
 
-    private JLabel dobLabel;
-    private JComboBox<String> date;
-    private JComboBox<String> month;
-    private JComboBox<String> year;
+    private final JLabel dobLabel;
+    private final JComboBox<String> date;
+    private final JComboBox<String> month;
+    private final JComboBox<String> year;
 
-    private JButton sub;
-    private JButton reset;
-    private JButton log;
-    private JLabel res;
+    private final JButton sub;
+    private final JButton reset;
+    private final JButton log;
+    private final JLabel res;
 
 
     /**
      * List of dates to populate dropdown
      */
-    private String[] dates = {
+    private final String[] dates = {
         "1","2","3","4","5","6","7","8","9","10",
         "11","12","13","14","15","16","17","18","19","20",
         "21","22","23","24","25","26","27","28","29","30","31"
@@ -71,7 +71,7 @@ class Registration extends JFrame implements ActionListener {
     /**
      * List of months to populate dropdown
      */
-    private String[] months = {
+    private final String[] months = {
         "Jan","Feb","Mar","Apr","May","Jun",
         "Jul","Aug","Sep","Oct","Nov","Dec"
     };
@@ -79,7 +79,7 @@ class Registration extends JFrame implements ActionListener {
     /**
      * List of years to populate dropdown, 1492 when America was found
      */
-    private String[] years = {
+    private final String[] years = {
         "1492","1493","1494","1495","1496","1497","1498","1499","1500",
         "1501","1502","1503","1504","1505","1506","1507","1508","1509","1510",
         "1511","1512","1513","1514","1515","1516","1517","1518","1519","1520",
@@ -353,6 +353,7 @@ class Registration extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == log){
+            @SuppressWarnings("unused")
             LoginBackend f = new LoginBackend();
             setVisible(false);
         }
@@ -407,6 +408,7 @@ class Registration extends JFrame implements ActionListener {
 
     // You can test the panel through running this function
     public static void main(String[] args) {
+        @SuppressWarnings("unused")
         Registration f = new Registration();
     }
     

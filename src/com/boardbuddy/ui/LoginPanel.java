@@ -10,14 +10,14 @@ import javax.swing.*;
 
 public class LoginPanel extends JFrame implements ActionListener {
 
-    private JLabel titleLabel;
-    private JLabel usernameLabel;
-    private JTextField userTxt;
-    private JLabel passwordLabel;
-    private JPasswordField passTxt;
-    public  JButton loginButton;
-    public JButton regisButton;
-    private JLabel failMessage;
+    private final JLabel titleLabel;
+    private final JLabel usernameLabel;
+    private final JTextField userTxt;
+    private final JLabel passwordLabel;
+    private final JPasswordField passTxt;
+    public  final JButton loginButton;
+    public final JButton regisButton;
+    private final JLabel failMessage;
 
     public LoginPanel() {
 
@@ -69,6 +69,7 @@ public class LoginPanel extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == regisButton) {
+            @SuppressWarnings("unused")
             Registration f = new Registration();
             setVisible(false);
         }
@@ -105,6 +106,7 @@ public class LoginPanel extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+        @SuppressWarnings("unused")
         LoginBackend f = new LoginBackend();
     }
     
