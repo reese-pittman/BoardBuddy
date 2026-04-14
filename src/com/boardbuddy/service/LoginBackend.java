@@ -1,15 +1,14 @@
 package com.boardbuddy.service;
 
+import com.boardbuddy.model.BoardGame;
+import com.boardbuddy.model.Collection;
+import com.boardbuddy.model.User;
+import com.boardbuddy.persistence.UserXml;
+import com.boardbuddy.ui.DashPanel;
+import com.boardbuddy.ui.LoginPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import com.boardbuddy.model.BoardGame;
-import com.boardbuddy.model.User;
-import com.boardbuddy.ui.DashPanel;
-import com.boardbuddy.ui.LoginPanel;
-import com.boardbuddy.persistence.UserXml;
-import com.boardbuddy.model.Collection;
 
 public class LoginBackend implements ActionListener {
 
@@ -35,6 +34,8 @@ public class LoginBackend implements ActionListener {
     public void actionPerformed(ActionEvent e) { 
         checkCredentials(GUI.getUsername(), GUI.getPassword());
     }
+
+
 
     /**
      * 
@@ -67,6 +68,10 @@ public class LoginBackend implements ActionListener {
         DashPanel dashPanel = new DashPanel(dashboard, allDatabaseGames); // loadGames is called automatically inside here
         dashPanel.setVisible(true);
     }
+
+    
+
+
 
    
     /**   if the info is correct than the dashboard will open, else if

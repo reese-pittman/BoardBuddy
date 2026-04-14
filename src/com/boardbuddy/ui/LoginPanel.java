@@ -1,11 +1,14 @@
 package com.boardbuddy.ui;
 
-import javax.swing.*;
+import com.boardbuddy.service.LoginBackend;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 
-public class LoginPanel extends JFrame   {
+
+
+public class LoginPanel extends JFrame implements ActionListener {
 
     private JLabel titleLabel;
     private JLabel usernameLabel;
@@ -13,6 +16,7 @@ public class LoginPanel extends JFrame   {
     private JLabel passwordLabel;
     private JPasswordField passTxt;
     public  JButton loginButton;
+    public JButton regisButton;
     private JLabel failMessage;
 
     public LoginPanel() {
@@ -36,10 +40,15 @@ public class LoginPanel extends JFrame   {
         // makes a new panel for the button and fail message if it appears 
         JPanel southPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         loginButton = new JButton("Login");
+
+        regisButton = new JButton("Register");
+        regisButton.addActionListener(this); 
+
         failMessage = new JLabel("", SwingConstants.CENTER);
 
         // adds the button and fail message 
         southPanel.add(loginButton);
+        southPanel.add(regisButton);
         southPanel.add(failMessage);
 
         // combines all of the other panals into one large panel
@@ -57,6 +66,13 @@ public class LoginPanel extends JFrame   {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == regisButton) {
+            Registration f = new Registration();
+            setVisible(false);
+        }
+    }
 
         // adds logic to the login button
     /**
@@ -65,6 +81,8 @@ public class LoginPanel extends JFrame   {
     public void setLoginAction(ActionListener action) {
         loginButton.addActionListener(action);
     }
+
+
     
     /**
      * @return what the user input in the username text box
@@ -86,4 +104,8 @@ public class LoginPanel extends JFrame   {
         failMessage.setText(message);
     }
 
+    public static void main(String[] args) {
+        LoginBackend f = new LoginBackend();
+    }
+    
 }

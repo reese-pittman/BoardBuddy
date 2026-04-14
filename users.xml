@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
+            
+    
     <user>
-        <username>test</username>
-        <password>pass</password>
+                        
+        
+        <username>jimmy123</username>
+                        
+        
+        <password>kp111</password>
+                    
+    
+    </user>
+        
+    
+    <user>
+                
+        <username>commy2</username>
+                
+        <password>6767</password>
+            
+    </user>
+    
+    <user>
+        <username>beans</username>
+        <password>6969</password>
     </user>
 </users>
