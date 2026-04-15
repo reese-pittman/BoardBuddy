@@ -44,4 +44,7 @@ public class User {
     public ArrayList<Collection> getUsersCollections() {
         return gameCollections;
     }
+    public String maskPassword(int length) {
+        return "*".repeat(length);
+    }
 }
