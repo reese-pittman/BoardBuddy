@@ -15,6 +15,8 @@ public class User {
         this.passwordHash = passwordHash;
         this.userID = userID; //(should be unique for each user)
         this.gameCollections = new java.util.ArrayList<>();
+
+        addUser(this);
     }
 
     // Getters
@@ -26,7 +28,7 @@ public class User {
     public ArrayList<Collection> getUsersCollections() {
         return gameCollections;
     }
-    public ArrayList<User> getUserList() {
+    public static ArrayList<User> getUserList() {
         return userList;
     }
 
@@ -42,13 +44,39 @@ public class User {
     public void addReview(Review review) {
         Review.reviewList.add(review);
     }
-
+    
+    /**
+     * Adds a new collection to a certain user
+     * @param collection
+     */
     public void addGameCollection(Collection collection) {
         gameCollections.add(collection);
     }
+
+    /**
+     * Adds a new user to the userList
+     * @param user
+     */
     public static void addUser(User user) {
         userList.add(user);
     }
 
+    /**
+     * Searches through the userlist to find user with username
+     * 
+     * @param username desired username to search for.
+     * @return null if not found.
+     */
+    public static User fetchUser(String username) { // TODO: Change to uid maybe because users can have same name
+        for (User user : userList) {
+            System.err.println(user.getUsername() + " " + user.getUID());
+            
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+
+        return null;
+    }
 
 }

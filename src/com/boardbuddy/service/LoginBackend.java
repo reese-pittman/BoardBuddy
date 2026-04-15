@@ -1,7 +1,6 @@
 package com.boardbuddy.service;
 
 import com.boardbuddy.model.User;
-import com.boardbuddy.persistence.UserXml;
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.ui.LoginPanel;
 import java.awt.event.ActionEvent;
@@ -40,7 +39,7 @@ public class LoginBackend implements ActionListener {
      * @throws Exception  if there is an error with the XML file not related to wrong user input 
      */
     public boolean checkUsername(String username) throws Exception {
-        User user = UserXml.loadUser(username); // returns null if username not found
+        User user = User.fetchUser(username); // returns null if username not found 
         return user != null; // true if found, false if not
     }
     
@@ -74,7 +73,7 @@ public class LoginBackend implements ActionListener {
      */
     public void checkCredentials(String username, String password) {
         try {
-            User user = UserXml.loadUser(username); // load user from xml
+            User user = User.fetchUser(username); // fetch the user from userlist
             if (user != null && checkPassword(user, password)) {
                 openNewPage(user);
             } else {

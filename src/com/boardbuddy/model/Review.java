@@ -38,7 +38,7 @@ public class Review {
     public static void addReview(Review newReview){
         reviewList.add(newReview);
         
-        // TODO: TESTING ONLY
+        // TODO: TESTING ONLY; saving will be done when loading dashboard and logout
         OutputXml.saveReviews();
     }
     

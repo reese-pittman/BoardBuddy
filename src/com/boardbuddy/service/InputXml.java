@@ -20,6 +20,7 @@ public class InputXml {
      * @param collectionName
      * @param userID
      */
+    @SuppressWarnings("UseSpecificCatch")
     public static Collection parse(String fileIn, String collectionName, int userID) {
         try {
             File file = new File(fileIn);
@@ -34,16 +35,16 @@ public class InputXml {
              * Check what the xml file contains.
              */
             switch (root) {
-                case "items":
+                case "items" -> {
                     return handleGames(doc, collectionName, userID);
-                case "reviews":
+                }
+                case "reviews" -> {
                     handleReviews(doc);
-                    break;
-                case "users":
+                }
+                case "users" -> {
                     handleUsers(doc);
-                    break;
-                default:
-                    System.out.println("Unknown root element: <" + root + ">. No data imported.");
+                }
+                default -> System.out.println("Unknown element: <" + root + ">. Nothing was imported.");
             }
             
         } catch (Exception e) {
@@ -124,11 +125,14 @@ public class InputXml {
         for (int i = 0; i < userNodes.getLength(); i++) {
             Element el = (Element) userNodes.item(i);
  
-            String title = getTextContent(el, "title");
-            String description = getTextContent(el, "description");
+            String username = getTextContent(el, "username");
+            String password = getTextContent(el, "password");
+
+            // TODO: hash password before storing in production (this is a maybe, for now it is just a string)
  
-            User newUser = new User(title, description, i);
-            User.addUser(newUser);
+            @SuppressWarnings("unused")
+            User newUser = new User(username, password, i);
+            // User.addUser(newUser);
             count++;
         }
  
