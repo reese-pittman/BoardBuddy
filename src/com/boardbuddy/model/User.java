@@ -22,17 +22,19 @@ public class User {
     public int getUID() {
         return userID;
     }
+    public ArrayList<Collection> getUsersCollections() {
+        return gameCollections;
+    }
 
-    //Setters
+    // Setters
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    //Just for creating a new array and then adding the new review to
+    // Just for creating a new array and then adding the new review to it
     public void addReview(Review review) {
         Review.reviewList.add(review);
     }
@@ -41,7 +43,5 @@ public class User {
         gameCollections.add(collection);
     }
 
-    public ArrayList<Collection> getUsersCollections() {
-        return gameCollections;
-    }
+
 }

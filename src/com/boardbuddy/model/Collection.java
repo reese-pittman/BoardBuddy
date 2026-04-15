@@ -24,11 +24,9 @@ public class Collection {
     public int getCollectionUID() {
         return userID;
     }
-
     public Collection getCollection() {
         return this;
     }
-
     public BoardGame getGame(int index) {
         if (index >= 0 && index < gameList.size()) {
             return gameList.get(index);
@@ -36,17 +34,30 @@ public class Collection {
         return null; // or throw an exception
     }
 
-    public ArrayList<BoardGame> getGames() {
-        return gameList;
-    }
-
     // Setters
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;
     }
 
-    public void addGame(BoardGame game) {
+    public boolean addGame(BoardGame game) {
+        for (BoardGame currentGame : gameList) {
+            if(currentGame == game) {
+                return false;
+            }
+        }
         gameList.add(game);
+        return true;
+    }
+
+    public boolean removeGame(BoardGame game) {
+        for (BoardGame currentGame : gameList) {
+            if(currentGame == game) {
+                gameList.remove(game);
+                return true;
+            }
+        }
+        
+        return false;
     }
 
 }

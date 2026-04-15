@@ -1,33 +1,23 @@
 package com.boardbuddy.service;
 
-import com.boardbuddy.model.BoardGame;
-import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.persistence.UserXml;
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.ui.LoginPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class LoginBackend implements ActionListener {
 
     // Creates an instance of the loginPanel Class (GUI)
     private final LoginPanel GUI;
 
-    private final ArrayList<BoardGame> allDatabaseGames;
+    // private final ArrayList<BoardGame> allDatabaseGames;
 
     // The constructor creates a composite relationship between the two classes. 
     // Final is used to 'force' this relationship
     public LoginBackend() { 
         this.GUI = new LoginPanel();
-
-        // MASTER game collection
-        String inputPath = "bgg90Games.xml";
-        Collection master = InputXml.parse(inputPath, "Master", -1);
-        //
-
-        this.allDatabaseGames = (master != null) ? master.getGameList() : new ArrayList<>();
 
         this.GUI.setLoginAction(this);
         this.GUI.setVisible(true);
@@ -69,13 +59,9 @@ public class LoginBackend implements ActionListener {
     public void openNewPage(User user) {
        GUI.setVisible(false);
         Dashboard dashboard = new Dashboard(user);
-        DashPanel dashPanel = new DashPanel(dashboard, allDatabaseGames); // loadGames is called automatically inside here
+        DashPanel dashPanel = new DashPanel(dashboard); // loadGames is called automatically inside here
         dashPanel.setVisible(true);
     }
-
-    
-
-
 
    
     /**   if the info is correct than the dashboard will open, else if
