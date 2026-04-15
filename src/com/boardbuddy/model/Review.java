@@ -1,7 +1,7 @@
 package com.boardbuddy.model;
 
+import com.boardbuddy.persistence.OutputXml;
 import java.util.ArrayList;
-import java.util.List;
 
 //Class to represent a review for a board game
 public class Review {
@@ -11,7 +11,7 @@ public class Review {
     private int userID; // used to link the review to a user
     private int gameID; // used to link the review to a game
 
-    public static List<Review> reviewList = new ArrayList<>();
+    public static ArrayList<Review> reviewList = new ArrayList<>();
 
     /**
      * Contructs a review object given the parameters.
@@ -37,6 +37,9 @@ public class Review {
      */
     public static void addReview(Review newReview){
         reviewList.add(newReview);
+        
+        // TODO: TESTING ONLY
+        OutputXml.saveReviews();
     }
     
     
@@ -45,8 +48,8 @@ public class Review {
      * @param request The gameID of the desired game
      * @return Returns a list of all reviews matching the desired gameID.
      */
-    public static List<Review> fetchReviews(int request){
-        List<Review> requestedList = new ArrayList<>();
+    public static ArrayList<Review> fetchReviews(int request){
+        ArrayList<Review> requestedList = new ArrayList<>();
         for (Review review : reviewList) {
             if (review.getGameID() == request) {
                 requestedList.add(review);
@@ -88,5 +91,8 @@ public class Review {
     }
     public int getGameID() {
         return gameID;
+    }
+    public static ArrayList<Review> getReviews() {
+        return reviewList;
     }
 }

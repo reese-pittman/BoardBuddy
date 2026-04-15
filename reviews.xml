@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<reviews>
+    <review>
+        <title>GREAT BAD GAME</title>
+        <description>Catan is a great strategy game but I have no friends to play with.</description>
+        <rating>4</rating>
+        <userID>-1</userID>
+        <gameID>13</gameID>
+    </review>
+    <review>
+        <title>Lets game</title>
+        <description>gaming</description>
+        <rating>4</rating>
+        <userID>0</userID>
+        <gameID>254127</gameID>
+    </review>
+    <review>
+        <title>weee</title>
+        <description>waaa</description>
+        <rating>5</rating>
+        <userID>0</userID>
+        <gameID>220308</gameID>
+    </review>
+    <review>
+        <title>game firstg</title>
+        <description>game game</description>
+        <rating>1</rating>
+        <userID>0</userID>
+        <gameID>173346</gameID>
+    </review>
+    <review>
+        <title>odin game</title>
+        <description>no</description>
+        <rating>3</rating>
+        <userID>0</userID>
+        <gameID>177736</gameID>
+    </review>
+</reviews>

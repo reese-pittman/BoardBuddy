@@ -29,6 +29,7 @@ public class GameView extends JPanel {
      * @param game Current GameName to tie it to reviews/collections
      */
     public GameView(User currentUser, int game) {
+
         GameView.currentUser = currentUser;
         uid = currentUser.getUID();
         setLayout(new BorderLayout(0, 12));

@@ -7,6 +7,8 @@ import com.boardbuddy.ui.LoginPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// TODO: Rewrite some of this to read user in InputXml
+
 public class LoginBackend implements ActionListener {
 
     // Creates an instance of the loginPanel Class (GUI)

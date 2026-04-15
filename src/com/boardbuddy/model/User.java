@@ -7,6 +7,7 @@ public class User {
     private String username;
     private String passwordHash; // may just be a password, but we may hash it
     private final int userID; // May be used for database purposes
+    private final static ArrayList<User> userList = new ArrayList<>();
     private final ArrayList<Collection> gameCollections; // Users can have multiple collections of games
 
     public User(String username, String passwordHash, int userID) {
@@ -25,6 +26,9 @@ public class User {
     public ArrayList<Collection> getUsersCollections() {
         return gameCollections;
     }
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
 
     // Setters
     public void setPasswordHash(String passwordHash) {
@@ -41,6 +45,9 @@ public class User {
 
     public void addGameCollection(Collection collection) {
         gameCollections.add(collection);
+    }
+    public static void addUser(User user) {
+        userList.add(user);
     }
 
 

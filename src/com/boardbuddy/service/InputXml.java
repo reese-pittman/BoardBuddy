@@ -3,14 +3,13 @@ package com.boardbuddy.service;
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
-
+import com.boardbuddy.model.User;
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
- 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 
 public class InputXml {
 
@@ -104,7 +103,7 @@ public class InputXml {
             String description = getTextContent(el, "description");
             int rating = parseTextContent(el, "rating");
             int userID = parseTextContent(el, "userID");
-            int gameID = Integer.parseInt(getTextContent(el, "id"));
+            int gameID = Integer.parseInt(getTextContent(el, "gameID"));
  
             Review review = new Review(title, description, rating, userID, gameID);
             Review.addReview(review);
@@ -119,8 +118,21 @@ public class InputXml {
      * @param doc
      */
     private static void handleUsers(Document doc) {
-        // TODO: implement once the User class is created
-        System.out.println("User import is not yet implemented.");
+        NodeList userNodes = doc.getElementsByTagName("user");
+        int count = 0;
+ 
+        for (int i = 0; i < userNodes.getLength(); i++) {
+            Element el = (Element) userNodes.item(i);
+ 
+            String title = getTextContent(el, "title");
+            String description = getTextContent(el, "description");
+ 
+            User newUser = new User(title, description, i);
+            User.addUser(newUser);
+            count++;
+        }
+ 
+        System.out.println("Imported " + count + " user(s).");
     }
 
     // Getters
