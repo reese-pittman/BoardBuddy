@@ -42,4 +42,11 @@
         <userID>1</userID>
         <gameID>30717</gameID>
     </review>
+    <review>
+        <title>Bean</title>
+        <description>CHAAAAAAAA</description>
+        <rating>3</rating>
+        <userID>1</userID>
+        <gameID>1406</gameID>
+    </review>
 </reviews>
