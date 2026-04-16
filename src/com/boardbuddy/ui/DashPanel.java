@@ -1,8 +1,9 @@
 package com.boardbuddy.ui;
 
 import com.boardbuddy.model.BoardGame;
+import com.boardbuddy.model.Collection;
 import com.boardbuddy.service.Dashboard;
-
+import com.boardbuddy.service.InputXml;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -19,9 +20,16 @@ public class DashPanel extends JFrame {
     private JLabel titleLabel;
     private JPanel gamesPanel;
 
-    public DashPanel(Dashboard dashboard, ArrayList<BoardGame> allDatabaseGames) {
+    public DashPanel(Dashboard dashboard) {
         this.dashboard = dashboard;
-        this.allDatabaseGames = allDatabaseGames;
+
+        // MASTER game collection
+        String inputPath = "bgg90Games.xml";
+        Collection master = InputXml.parse(inputPath, "Master", -1);
+        //
+
+        allDatabaseGames = (master != null) ? master.getGameList() : new ArrayList<>();
+
 
         setTitle("BoardBuddy Dashboard");
         setSize(900, 600);
@@ -113,7 +121,7 @@ public class DashPanel extends JFrame {
     private void openCollectionsMenu() {
         String collectionName = JOptionPane.showInputDialog(
                 this,
-                "Enter collection name:"
+                "Enter collection name:" // TODO: Make and go to a collections screen.
         );
 
         if (collectionName != null && !collectionName.trim().isEmpty()) {

@@ -82,12 +82,18 @@ public class GameView extends JPanel {
         JButton leaveReviewButton = new JButton("Leave a Review");
         leaveReviewButton.addActionListener(e -> showReviewDialog(uid, game));
 
+        // Add To collection
         JButton addToCollection = new JButton("Add game to collection!");
         addToCollection.addActionListener(e -> addCollectionDialog(addToCollection));
+
+        // Remove from collection
+        JButton removeFromCollection = new JButton("Remove game from collection!");
+        removeFromCollection.addActionListener(e -> removeCollectionDialog(removeFromCollection));
 
         JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         bottomButtons.add(leaveReviewButton);
         bottomButtons.add(addToCollection);
+        bottomButtons.add(removeFromCollection);
 
         reviewsSection.add(scrollPane, BorderLayout.CENTER);
         reviewsSection.add(bottomButtons, BorderLayout.SOUTH);
@@ -102,8 +108,7 @@ public class GameView extends JPanel {
      * Show the options to add current game to a collection. 
      * List all user's collections or add to a new collection.
      * 
-     * @param uid
-     * @param game
+     * @param anchor button to anchor dialog back to
      */
     private void addCollectionDialog(JButton anchor) {
         if (currentGame == null) return;
@@ -121,10 +126,18 @@ public class GameView extends JPanel {
                 if (collection == null) continue;
                 JMenuItem item = new JMenuItem(collection.getCollectionName());
                 item.addActionListener(e -> {
-                    collection.addGame(currentGame);
-                    JOptionPane.showMessageDialog(this, "\"" + currentGame.getName() + "\" added to \"" 
-                    + collection.getCollectionName() + "\".", "Added to Collection", JOptionPane.INFORMATION_MESSAGE
-                    );
+                    boolean success = collection.addGame(currentGame);
+                    if (success) {
+                        JOptionPane.showMessageDialog(this, "\"" + currentGame.getName() + "\" added to \"" 
+                        + collection.getCollectionName() + "\".", "Added to Collection", JOptionPane.INFORMATION_MESSAGE
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                        "\"" + currentGame.getName() + "\" was not able to be added to \"" + collection.getCollectionName() + "\".",
+                        "Error adding game to collection.",
+                        JOptionPane.ERROR_MESSAGE
+                        );
+                    }                    
                 });
                 menu.add(item);
             }
@@ -140,6 +153,24 @@ public class GameView extends JPanel {
                 "New Collection",
                 JOptionPane.PLAIN_MESSAGE
             );
+
+
+            // Check if the Collection already exists
+            for (Collection collection : collections) {
+                if (collection == null) {
+                    continue;
+                }
+                if (collection.getCollectionName().equals(name)) {
+                    System.err.println("Is existing!");
+                    JOptionPane.showMessageDialog(this,
+                    "Collection \"" + name.trim() + "\" already exists!",
+                    "Could not create Collection.",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+            } // Short circuit it making a new collection by returning.
+
             if (name != null && !name.trim().isEmpty()) {
                 Collection newCollection = new Collection(name.trim(), uid);
                 currentUser.addGameCollection(newCollection);
@@ -156,6 +187,49 @@ public class GameView extends JPanel {
         menu.add(newItem);
 
         menu.show(anchor, 0, anchor.getHeight());
+    }
+
+    /**
+     * Lets user remove a game from a collection.
+     * 
+     * @param anchor button to anchor dialog back to
+     */
+    private void removeCollectionDialog(JButton anchor) {
+        if (currentGame == null) return;
+
+        java.util.ArrayList<Collection> collections = currentUser.getUsersCollections();
+
+        JPopupMenu menu = new JPopupMenu();
+
+        if (collections.isEmpty()) {
+            JMenuItem empty = new JMenuItem("No collectoins yet.");
+            empty.setEnabled(false);
+            menu.add(empty);
+        } else {
+            for (Collection collection : collections) {
+                if (collection == null) continue;
+                JMenuItem item = new JMenuItem(collection.getCollectionName());
+                item.addActionListener(e -> {
+                    boolean success = collection.removeGame(currentGame);
+                    if (success) {
+                        JOptionPane.showMessageDialog(this, "\"" + currentGame.getName() + "\" removed from \"" 
+                        + collection.getCollectionName() + "\".", "Removed from Collection", JOptionPane.INFORMATION_MESSAGE
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                        "\"" + currentGame.getName() + "\" was not able to be removed from \"" + collection.getCollectionName() + "\".",
+                        "Error removing game from collection.",
+                        JOptionPane.ERROR_MESSAGE
+                        );
+                    }                    
+                });
+                menu.add(item);
+            }
+            menu.addSeparator();
+        }
+
+        menu.show(anchor, 0, anchor.getHeight());
+
     }
 
     /**

@@ -36,8 +36,8 @@ public class Dashboard {
 
         for (Collection collection : usersCollections) {
             if (collection != null &&
-                collection.getGames() != null &&
-                !collection.getGames().isEmpty()) {
+                collection.getGameList() != null &&
+                !collection.getGameList().isEmpty()) {
                 return collection;
             }
         }
@@ -63,9 +63,9 @@ public class Dashboard {
         ArrayList<BoardGame> baseGames;
 
         if (activeCollection != null &&
-            activeCollection.getGames() != null &&
-            !activeCollection.getGames().isEmpty()) {
-            baseGames = activeCollection.getGames();
+            activeCollection.getGameList() != null &&
+            !activeCollection.getGameList().isEmpty()) {
+            baseGames = activeCollection.getGameList();
         } else {
             baseGames = getRandomGames(allDatabaseGames, 10);
             // baseGames = getRandomGames(allDatabaseGames, allDatabaseGames.size());
