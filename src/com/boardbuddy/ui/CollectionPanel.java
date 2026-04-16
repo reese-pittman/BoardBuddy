@@ -2,7 +2,6 @@ package com.boardbuddy.ui;
 
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
-
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -33,9 +32,8 @@ public class CollectionPanel extends JFrame {
     private void initComponents() {
         setLayout(new BorderLayout());
 
-        // ─── Top Bar ─────────────────────────────────────────────
+        // Top bar
         JPanel topPanel = new JPanel(new BorderLayout());
-
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         collectionDropdown = new JComboBox<>();
@@ -48,18 +46,16 @@ public class CollectionPanel extends JFrame {
 
         navPanel.add(dashboardButton);
         navPanel.add(profileButton);
-
         topPanel.add(navPanel, BorderLayout.EAST);
 
         add(topPanel, BorderLayout.NORTH);
 
-        // ─── Center Content ─────────────────────────────────────
+        // Center
         JPanel centerPanel = new JPanel(new BorderLayout());
 
         titleLabel = new JLabel("Collections");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
         centerPanel.add(titleLabel, BorderLayout.NORTH);
 
         gamesPanel = new JPanel();
@@ -71,7 +67,7 @@ public class CollectionPanel extends JFrame {
 
         add(centerPanel, BorderLayout.CENTER);
 
-        // ─── Event Handlers ─────────────────────────────────────
+        // Events
         collectionDropdown.addActionListener(e -> {
             int selectedIndex = collectionDropdown.getSelectedIndex();
             if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
@@ -83,12 +79,10 @@ public class CollectionPanel extends JFrame {
 
         dashboardButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Go to Dashboard");
-            // TODO: open dashboard screen here
         });
 
         profileButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Go to Profile Page");
-            // TODO: open profile screen here
         });
     }
 
@@ -134,8 +128,37 @@ public class CollectionPanel extends JFrame {
                 gameButton.setPreferredSize(new Dimension(200, 100));
 
                 gameButton.addActionListener(e -> {
-                    JOptionPane.showMessageDialog(this, "Selected: " + game.getName());
-                    // TODO: open game details if needed
+                    int selectedIndex = collectionDropdown.getSelectedIndex();
+
+                    if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
+                        Collection selectedCollection = userCollections.get(selectedIndex);
+
+                        int choice = JOptionPane.showConfirmDialog(
+                                this,
+                                "Remove \"" + game.getName() + "\" from " + selectedCollection.getCollectionName() + "?",
+                                "Remove Game",
+                                JOptionPane.YES_NO_OPTION
+                        );
+
+                        if (choice == JOptionPane.YES_OPTION) {
+                            boolean removed = selectedCollection.removeGame(game);
+
+                            if (removed) {
+                                JOptionPane.showMessageDialog(
+                                        this,
+                                        game.getName() + " was removed from " + selectedCollection.getCollectionName() + "."
+                                );
+                                loadGames(selectedCollection.getGameList());
+                            } else {
+                                JOptionPane.showMessageDialog(
+                                        this,
+                                        "Could not remove game.",
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE
+                                );
+                            }
+                        }
+                    }
                 });
 
                 gamesPanel.add(gameButton);
