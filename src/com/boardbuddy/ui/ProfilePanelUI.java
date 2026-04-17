@@ -1,9 +1,9 @@
 package com.boardbuddy.ui;
 
 import com.boardbuddy.model.User;
-import javax.swing.*;
-
+import com.boardbuddy.service.LoginBackend;
 import java.awt.*;
+import javax.swing.*;
 
 public class ProfilePanelUI extends JFrame {
     private User currentUser;
@@ -14,6 +14,8 @@ public class ProfilePanelUI extends JFrame {
     private JLabel profileLabel;
     private JButton passwordButton;
     private JButton usernameButton;
+    private JButton logoutButton;
+    
     private Font font;
 
 
@@ -39,8 +41,11 @@ public class ProfilePanelUI extends JFrame {
         collectionButton = new JButton("Collections");
         dashboardButton = new JButton("Dashboard");
 
+        JButton logoutButton = new JButton("Logout");
+
         buttonPanel.add(collectionButton, BorderLayout.NORTH);
         buttonPanel.add(dashboardButton);
+        buttonPanel.add(logoutButton);
 
         topPanel.add(buttonPanel, BorderLayout.EAST);
         add(topPanel, BorderLayout.NORTH);
@@ -89,11 +94,15 @@ public class ProfilePanelUI extends JFrame {
 
 //--------------------Event Handlers---------------------------------------//
 
+    logoutButton.addActionListener(e -> {
+        LoginBackend.LogOut(this);
+    });
+
     }
-    //  public static void main(String[] args) {
-    //     User testU = new User("test", "pass", 101010);
-    //      new ProfilePanelUI(testU).setVisible(true);
-    //  }
+     public static void main(String[] args) {
+        User testU = new User("test", "pass", 101010);
+         new ProfilePanelUI(testU).setVisible(true);
+     }
 }
 
 

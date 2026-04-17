@@ -1,6 +1,7 @@
 package com.boardbuddy.service;
 
 import com.boardbuddy.model.User;
+import com.boardbuddy.persistence.OutputXml;
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.ui.LoginPanel;
 import java.awt.Component;
@@ -96,7 +97,7 @@ public class LoginBackend implements ActionListener {
         );
 
         if (choice == JOptionPane.YES_OPTION) {
-            // Call save logic
+            OutputXml.saveAll();  // Calls from OutputXml to save the file
             parent.setVisible(false);
             new LoginBackend();
         }

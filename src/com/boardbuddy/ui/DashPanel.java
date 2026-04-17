@@ -53,7 +53,7 @@ public class DashPanel extends JFrame {
         searchField = new JTextField(20);
         collectionsButton = new JButton("Collections");
         profileButton = new JButton("Profile");
-        JButton logoutButton = new JButton("Logout");
+        // JButton logoutButton = new JButton("Logout");
 
         topPanel.add(searchField, BorderLayout.CENTER);
 
@@ -61,8 +61,7 @@ public class DashPanel extends JFrame {
         navPanel.add(profileButton);
         
         // In the case that we want logout to be on the dashboard
-        navPanel.add(logoutButton);
-
+        // navPanel.add(logoutButton);
 
         topPanel.add(navPanel, BorderLayout.EAST);
 
