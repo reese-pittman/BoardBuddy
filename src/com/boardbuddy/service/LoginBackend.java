@@ -29,8 +29,6 @@ public class LoginBackend implements ActionListener {
         checkCredentials(GUI.getUsername(), GUI.getPassword());
     }
 
-
-
     /**
      * 
      * @param username  The username that the user enetered and the system is checking 
@@ -82,5 +80,15 @@ public class LoginBackend implements ActionListener {
             GUI.setFailMessage("Error loading user data");
         }
     }
+
+
+
+    // public void logOut(ActionEvent e) {
+    //     if (e.getSource() == log){
+    //         @SuppressWarnings("unused")
+    //         LoginBackend f = new LoginBackend();
+    //         setVisible(false);
+    //     }
+    // }
 
 }
