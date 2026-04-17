@@ -8,6 +8,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
+
+
 public class DashPanel extends JFrame {
 
     private final Dashboard dashboard;
@@ -51,11 +53,16 @@ public class DashPanel extends JFrame {
         searchField = new JTextField(20);
         collectionsButton = new JButton("Collections");
         profileButton = new JButton("Profile");
+        JButton logoutButton = new JButton("Logout");
 
         topPanel.add(searchField, BorderLayout.CENTER);
 
         navPanel.add(collectionsButton);
         navPanel.add(profileButton);
+        
+        // In the case that we want logout to be on the dashboard
+        navPanel.add(logoutButton);
+
 
         topPanel.add(navPanel, BorderLayout.EAST);
 
@@ -94,6 +101,12 @@ public class DashPanel extends JFrame {
         profileButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Go to Profile Page");
         });
+
+        /* 
+        logoutButton.addActionListener(e -> {
+            LoginBackend.LogOut(this);
+        });
+        */
     }
 
     private void loadGames(ArrayList<BoardGame> games) {

@@ -4,8 +4,11 @@ import com.boardbuddy.model.User;
 import com.boardbuddy.persistence.UserXml;
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.ui.LoginPanel;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
 
 public class LoginBackend implements ActionListener {
 
@@ -82,13 +85,19 @@ public class LoginBackend implements ActionListener {
     }
 
 
+    // Logout function
+    public static void LogOut(Component parent) {
+        int choice = JOptionPane.showConfirmDialog(
+            parent,
+            "Are you sure you want to log out?",
+            "Confirm Logout",
+            JOptionPane.YES_NO_OPTION
+        );
 
-    // public void logOut(ActionEvent e) {
-    //     if (e.getSource() == log){
-    //         @SuppressWarnings("unused")
-    //         LoginBackend f = new LoginBackend();
-    //         setVisible(false);
-    //     }
-    // }
-
+        if (choice == JOptionPane.YES_OPTION) {
+            // Call save logic
+            parent.setVisible(false);
+            new LoginBackend();
+        }
+    }
 }

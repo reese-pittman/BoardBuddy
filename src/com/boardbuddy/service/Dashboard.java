@@ -95,6 +95,7 @@ public class Dashboard {
         return filtered;
     }
 
+
     /**
      * Called when the user selects a collection by name.
      */

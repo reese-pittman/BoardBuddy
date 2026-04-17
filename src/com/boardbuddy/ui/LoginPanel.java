@@ -51,8 +51,8 @@ public class LoginPanel extends JFrame implements ActionListener {
 
         // adds the button and fail message 
         southPanel.add(loginButton);
-        southPanel.add(quitButton);
         southPanel.add(regisButton);
+        southPanel.add(quitButton);
         southPanel.add(failMessage);
 
         // combines all of the other panals into one large panel
