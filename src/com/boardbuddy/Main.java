@@ -1,10 +1,7 @@
 package com.boardbuddy;
 
-import com.boardbuddy.model.BoardGame;
-import com.boardbuddy.model.Collection;
 import com.boardbuddy.service.InputXml;
 import com.boardbuddy.service.LoginBackend;
-import java.util.ArrayList;
 
 /**
  * Main Program
@@ -19,32 +16,34 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        String inputPath = "bgg90Games.xml";
-
         /**
          * Importing Collection and printing gamelist
          */
-        Collection masterCollection = InputXml.parse(inputPath, "Master", -1);
+        // String inputPath = "bgg90Games.xml";
+        // Collection masterCollection = InputXml.parse(inputPath, "Master", -1);
 
-        if (masterCollection == null) {
-            System.out.println("failure");
-            return;
-        }
-
-        ArrayList<BoardGame> masterList = masterCollection.getGameList();
-                System.out.println("Collection: " + masterCollection.getCollectionName());
-        System.out.println("Games found: " + masterList.size());
-        System.out.println("---");
+        // if (masterCollection == null) {
+        //     System.out.println("failure");
+        //     return;
+        // }
+        // ArrayList<BoardGame> masterList = masterCollection.getGameList();
+        //         System.out.println("Collection: " + masterCollection.getCollectionName());
+        // System.out.println("Games found: " + masterList.size());
+        // System.out.println("---");
  
-        for (BoardGame game : masterList) {
-            System.out.println("Name:        " + game.getName());
-            System.out.println("ID:          " + game.getId());
-            System.out.println("Year:        " + game.getYear());
-            System.out.println("Players:     " + game.getMinPlayers() + " - " + game.getMaxPlayers());
-            System.out.println("Play time:   " + game.getPlayTime() + " min");
-            System.out.println("Thumbnail:   " + game.getThumbnail());
-            System.out.println("---");
-        }
+        // for (BoardGame game : masterList) {
+        //     System.out.println("Name:        " + game.getName());
+        //     System.out.println("ID:          " + game.getId());
+        //     System.out.println("Year:        " + game.getYear());
+        //     System.out.println("Players:     " + game.getMinPlayers() + " - " + game.getMaxPlayers());
+        //     System.out.println("Play time:   " + game.getPlayTime() + " min");
+        //     System.out.println("Thumbnail:   " + game.getThumbnail());
+        //     System.out.println("---");
+        // }
+
+
+        InputXml.parse("reviews.xml", "Reviews", -1); // return value can be ignored
+        InputXml.parse("users.xml", "Users", -1);
 
         // Start the chain to login -> dashboard
         // Unused is okay
@@ -55,5 +54,4 @@ public class Main {
 
     }
 
-    // Actual final main goes down here
 }
