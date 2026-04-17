@@ -1,0 +1,99 @@
+package com.boardbuddy.ui;
+
+import com.boardbuddy.model.User;
+import javax.swing.*;
+
+import java.awt.*;
+
+public class ProfilePanelUI extends JFrame {
+    private User currentUser;
+    private JButton collectionButton;
+    private JButton dashboardButton;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
+    private JLabel profileLabel;
+    private JButton passwordButton;
+    private JButton usernameButton;
+    private Font font;
+
+
+
+    public ProfilePanelUI(User currentUser){
+        this.currentUser = currentUser;
+        
+        setTitle("My Profile");
+        setSize(900,600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        insideComponents();
+    }
+
+    public void insideComponents(){
+        font = new Font("Arial", Font.BOLD, 40);
+        setLayout(new BorderLayout());
+//------------------NORTH Bar---------------------------------------------//
+        JPanel topPanel = new JPanel(new BorderLayout()); 
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        collectionButton = new JButton("Collections");
+        dashboardButton = new JButton("Dashboard");
+
+        buttonPanel.add(collectionButton, BorderLayout.NORTH);
+        buttonPanel.add(dashboardButton);
+
+        topPanel.add(buttonPanel, BorderLayout.EAST);
+        add(topPanel, BorderLayout.NORTH);
+
+//-------------------CENTER Bar----------------------------------------//
+    JPanel centerPanel = new JPanel();
+    centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+
+    usernameLabel = new JLabel("Current Username: " + currentUser.getUsername());
+    usernameButton = new JButton("Change UserName");
+    passwordLabel = new JLabel("Current Password: " + currentUser.maskPassword(currentUser.getPasswordHash().length()));
+    passwordButton = new JButton("Change Password");
+    profileLabel = new JLabel("My Profile");
+
+    usernameLabel.setFont(font);
+    passwordLabel.setFont(font);
+    profileLabel.setFont(font);
+
+//---------------Row 1: Profile label (centered)--------------------------//
+    JPanel profilePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    profilePanel.add(profileLabel);
+
+//-----------------Row 2: Username label----------------------------------//
+    JPanel usernamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    usernamePanel.add(usernameLabel);
+
+//-----------------Row 3: Username button--------------------------------//
+    JPanel usernamePanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    usernamePanel2.add(usernameButton);
+
+//------------------Row 4: Password label + button------------------------//
+    JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    passwordPanel.add(passwordLabel);
+
+//-----------------Row 5: Password Button--------------------------------//
+    JPanel passwordPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    passwordPanel2.add(passwordButton);
+
+//---------------------Combine all panels---------------------------------//
+    centerPanel.add(profilePanel);
+    centerPanel.add(usernamePanel);
+    centerPanel.add(usernamePanel2);
+    centerPanel.add(passwordPanel);
+    centerPanel.add(passwordPanel2);
+    add(centerPanel, BorderLayout.CENTER);
+
+//--------------------Event Handlers---------------------------------------//
+
+    }
+    //  public static void main(String[] args) {
+    //     User testU = new User("test", "pass", 101010);
+    //      new ProfilePanelUI(testU).setVisible(true);
+    //  }
+}
+
+
