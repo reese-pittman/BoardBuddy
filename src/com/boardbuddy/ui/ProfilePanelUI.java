@@ -90,10 +90,10 @@ public class ProfilePanelUI extends JFrame {
 //--------------------Event Handlers---------------------------------------//
 
     }
-    //  public static void main(String[] args) {
-    //     User testU = new User("test", "pass", 101010);
-    //      new ProfilePanelUI(testU).setVisible(true);
-    //  }
+     public static void main(String[] args) {
+        User testU = new User("test", "pass", 101010);
+          new ProfilePanelUI(testU).setVisible(true);
+      }
 }
 
 
