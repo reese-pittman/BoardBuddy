@@ -1,7 +1,7 @@
 package com.boardbuddy.ui;
 
 import com.boardbuddy.model.User;
-import com.boardbuddy.persistence.UserXml;
+import com.boardbuddy.persistence.OutputXml;
 import com.boardbuddy.service.LoginBackend;
 import java.awt.*;
 import java.awt.event.*;
@@ -399,9 +399,11 @@ class Registration extends JFrame implements ActionListener {
 
             // This part writes to the xml file after clicking submit
             try {
-                UserXml userXml = new UserXml();
-                User newUser = new User(username, password, 0);
-                userXml.saveUser(newUser);
+                // makes a new user, index is size of userList
+                int n = User.getUserList().size();
+                @SuppressWarnings("unused")
+                User newUser = new User(username, password, n);
+                OutputXml.saveUsers();
             } 
 
             catch (Exception ex) {
