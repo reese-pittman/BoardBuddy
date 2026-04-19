@@ -3,6 +3,7 @@ package com.boardbuddy.service;
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
+import com.boardbuddy.persistence.OutputXml;
 import com.boardbuddy.ui.GameView;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +20,11 @@ public class Dashboard {
         this.user = user;
         this.usersCollections = user.getUsersCollections();
         this.activeCollection = chooseDefaultCollection();
+
+        // Maintainence
+        OutputXml.saveAll();
+        //
+
     }
 
     /**
@@ -94,6 +100,7 @@ public class Dashboard {
         filtered.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
         return filtered;
     }
+
 
     /**
      * Called when the user selects a collection by name.

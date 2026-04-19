@@ -16,6 +16,7 @@ public class LoginPanel extends JFrame implements ActionListener {
     private final JLabel passwordLabel;
     private final JPasswordField passTxt;
     public  final JButton loginButton;
+    public final JButton quitButton;
     public final JButton regisButton;
     private final JLabel failMessage;
 
@@ -41,14 +42,17 @@ public class LoginPanel extends JFrame implements ActionListener {
         JPanel southPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         loginButton = new JButton("Login");
 
+        quitButton = new JButton("Exit");
         regisButton = new JButton("Register");
         regisButton.addActionListener(this); 
+        quitButton.addActionListener(this);
 
         failMessage = new JLabel("", SwingConstants.CENTER);
 
         // adds the button and fail message 
         southPanel.add(loginButton);
         southPanel.add(regisButton);
+        southPanel.add(quitButton);
         southPanel.add(failMessage);
 
         // combines all of the other panals into one large panel
@@ -73,7 +77,12 @@ public class LoginPanel extends JFrame implements ActionListener {
             Registration f = new Registration();
             setVisible(false);
         }
+
+        if (e.getSource()==quitButton){
+            System.exit(0);
+        }
     }
+
 
         // adds logic to the login button
     /**
@@ -82,8 +91,6 @@ public class LoginPanel extends JFrame implements ActionListener {
     public void setLoginAction(ActionListener action) {
         loginButton.addActionListener(action);
     }
-
-
     
     /**
      * @return what the user input in the username text box

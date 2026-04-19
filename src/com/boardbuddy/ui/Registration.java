@@ -1,7 +1,7 @@
 package com.boardbuddy.ui;
 
 import com.boardbuddy.model.User;
-import com.boardbuddy.persistence.UserXml;
+import com.boardbuddy.persistence.OutputXml;
 import com.boardbuddy.service.LoginBackend;
 import java.awt.*;
 import java.awt.event.*;
@@ -55,6 +55,7 @@ class Registration extends JFrame implements ActionListener {
     private final JButton sub;
     private final JButton reset;
     private final JButton log;
+    private final JButton quit;
     private final JLabel res;
 
 
@@ -167,7 +168,7 @@ class Registration extends JFrame implements ActionListener {
         c.add(title);
 
         // --- Username ---
-        usernameLabel = new JLabel("Username");
+        usernameLabel = new JLabel("Username *");
         usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameLabel.setSize(LABEL_W, 20);
         usernameLabel.setLocation(LABEL_X, 100);
@@ -180,7 +181,7 @@ class Registration extends JFrame implements ActionListener {
         c.add(tusername);
 
         // --- Password ---
-        passwordLabel = new JLabel("Password");
+        passwordLabel = new JLabel("Password *");
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         passwordLabel.setSize(LABEL_W, 20);
         passwordLabel.setLocation(LABEL_X, 150);
@@ -193,7 +194,7 @@ class Registration extends JFrame implements ActionListener {
         c.add(tpass);
 
         // --- Confirm Password ---
-        confirmPasswordLabel = new JLabel("Confirm Password");
+        confirmPasswordLabel = new JLabel("Confirm Password *");
         confirmPasswordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         confirmPasswordLabel.setSize(LABEL_W, 20);
         confirmPasswordLabel.setLocation(LABEL_X, 200);
@@ -281,6 +282,16 @@ class Registration extends JFrame implements ActionListener {
         c.add(reset);
 
 
+        // Exit program button
+        quit = new JButton("Exit");
+        quit.setFont(new Font("Arial", Font.PLAIN, 15));
+        quit.setSize(100, 25);
+        quit.setLocation(390,450);
+        quit.addActionListener(this);
+        c.add(quit);
+
+
+
         // Login button
         log = new JButton("Login");
         log.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -352,6 +363,10 @@ class Registration extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource() == quit){
+            System.exit(0);
+        }
+
         if (e.getSource() == log){
             @SuppressWarnings("unused")
             LoginBackend f = new LoginBackend();
@@ -384,9 +399,11 @@ class Registration extends JFrame implements ActionListener {
 
             // This part writes to the xml file after clicking submit
             try {
-                UserXml userXml = new UserXml();
-                User newUser = new User(username, password, 0);
-                userXml.saveUser(newUser);
+                // makes a new user, index is size of userList
+                int n = User.getUserList().size();
+                @SuppressWarnings("unused")
+                User newUser = new User(username, password, n);
+                OutputXml.saveUsers();
             } 
 
             catch (Exception ex) {
@@ -408,9 +425,9 @@ class Registration extends JFrame implements ActionListener {
 
     // You can test the panel through running this function
     public static void main(String[] args) {
-        @SuppressWarnings("unused")
         Registration f = new Registration();
     }
+    
     
 
 }
