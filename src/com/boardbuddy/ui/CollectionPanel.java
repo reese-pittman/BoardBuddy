@@ -130,6 +130,28 @@ public class CollectionPanel extends JFrame {
             loadGames(newCollection.getGameList());
         });
 
+        removeCollectionButton.addActionListener(e -> {
+            int selectedIndex = collectionDropdown.getSelectedIndex();
+
+            if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
+                Collection selectedCollection = userCollections.get(selectedIndex);
+
+                int choice = JOptionPane.showConfirmDialog(
+                        this,
+                        "Are you sure you want to delete the collection \""
+                        + selectedCollection.getCollectionName() + "\"?",
+                        "Delete Collection",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (choice == JOptionPane.YES_OPTION) {
+                    user.deleteGameCollection(selectedCollection);
+                    loadCollectionNames();
+                    setDefaultCollection();
+                }
+            }
+        });
+
         dashboardButton.addActionListener(e -> {
             new DashPanel(new Dashboard(user)).setVisible(true);
             dispose();
