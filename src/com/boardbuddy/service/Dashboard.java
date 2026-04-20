@@ -25,7 +25,7 @@ public class Dashboard {
     return user;
     }
 
-
+    
     /**
      * Picks the collection to show on dashboard startup.
      *
