@@ -45,6 +45,7 @@ public class CollectionPanel extends JFrame {
         dashboardButton = new JButton("Dashboard");
         profileButton = new JButton("Profile");
         createCollectionButton = new JButton("Create Collection");
+        deleteCollectionButton = new JButton("Delete Collection");
 
         loadCollectionNames();
 
@@ -53,7 +54,7 @@ public class CollectionPanel extends JFrame {
         navPanel.add(createCollectionButton);
         navPanel.add(dashboardButton);
         navPanel.add(profileButton);
-
+        navPanel.add(deleteCollectionButton);
         topPanel.add(navPanel, BorderLayout.EAST);
 
         add(topPanel, BorderLayout.NORTH);
