@@ -98,14 +98,10 @@ public class DashPanel extends JFrame {
         });
 
         profileButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Connect profile navigation here.");
+            new ProfilePanelUI(dashboard.getUser()).setVisible(true);
+            dispose();
         });
 
-        /* 
-        logoutButton.addActionListener(e -> {
-            LoginBackend.LogOut(this);
-        });
-        */
     }
 
     private void loadGames(ArrayList<BoardGame> games) {
@@ -133,7 +129,7 @@ public class DashPanel extends JFrame {
     private void openCollectionsMenu() {
         String collectionName = JOptionPane.showInputDialog(
                 this,
-                "Enter collection name:" // TODO: Make and go to a collections screen.
+                "Enter collection name:"
         );
 
         if (collectionName != null && !collectionName.trim().isEmpty()) {

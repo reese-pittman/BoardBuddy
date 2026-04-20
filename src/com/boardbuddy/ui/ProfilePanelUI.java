@@ -1,13 +1,8 @@
 package com.boardbuddy.ui;
 
 import com.boardbuddy.model.User;
-<<<<<<< HEAD
-import javax.swing.*;
-import com.boardbuddy.service.ProfilePanelBackend;
-
-=======
 import com.boardbuddy.service.LoginBackend;
->>>>>>> main
+import com.boardbuddy.service.ProfilePanelBackend;
 import java.awt.*;
 import javax.swing.*;
 
@@ -107,39 +102,6 @@ public class ProfilePanelUI extends JFrame {
         backend.openDash(currentUser,this);
     });
 
-<<<<<<< HEAD
-    usernameButton.addActionListener(e -> {
-        String newUsername = JOptionPane.showInputDialog(this, "Enter new Username");
-        if (newUsername != null && !newUsername.isBlank() && !currentUser.getUsername().equals(newUsername)){
-                currentUser.setUsername(newUsername);
-                usernameLabel.setText("Current Username: " + newUsername);
-                // TODO: rewite the information into the XML file 
-        }
-        else{
-                JOptionPane.showMessageDialog(null, "Invalid Username", "Error Title", JOptionPane.ERROR_MESSAGE);
-        }
-    });
-
-    passwordButton.addActionListener(e -> {
-        String newPassword = backend.showPasswordDialog();
-        if (newPassword != null && !newPassword.isBlank() && !currentUser.getPasswordHash().equals(newPassword)) {
-                currentUser.setPasswordHash(newPassword); 
-                passwordLabel.setText("Current Password: " + currentUser.maskPassword(newPassword.length()));
-                 // TODO: rewite the information into the XML file 
-
-        }
-        else{
-                JOptionPane.showMessageDialog(null, "Invalid Password", "Error Title", JOptionPane.ERROR_MESSAGE);
-        }
-    });
-
-    
-    }
-//      public static void main(String[] args) {
-//         User testU = new User("test", "pass", 101010);
-//           new ProfilePanelUI(testU).setVisible(true);
-//       }
-=======
     logoutButton.addActionListener(e -> {
         LoginBackend.LogOut(this);
     });
@@ -149,7 +111,6 @@ public class ProfilePanelUI extends JFrame {
         User testU = new User("test", "pass", 101010);
          new ProfilePanelUI(testU).setVisible(true);
      }
->>>>>>> main
 }
 
 
