@@ -2,6 +2,8 @@ package com.boardbuddy.ui;
 
 import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
+import com.boardbuddy.model.User;
+import com.boardbuddy.service.Dashboard;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -9,6 +11,7 @@ import javax.swing.*;
 public class CollectionPanel extends JFrame {
 
     private final ArrayList<Collection> userCollections;
+    private final User user;
 
     private JComboBox<String> collectionDropdown;
     private JButton dashboardButton;
@@ -18,8 +21,9 @@ public class CollectionPanel extends JFrame {
     private JLabel titleLabel;
     private JPanel gamesPanel;
 
-    public CollectionPanel(ArrayList<Collection> userCollections) {
+    public CollectionPanel(ArrayList<Collection> userCollections, User user) {
         this.userCollections = userCollections;
+        this.user = user;
 
         setTitle("BoardBuddy Collections");
         setSize(900, 600);
@@ -127,7 +131,8 @@ public class CollectionPanel extends JFrame {
         });
 
         dashboardButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Connect dashboard navigation here.");
+            new DashPanel(new Dashboard(user)).setVisible(true);
+            dispose();
         });
 
         profileButton.addActionListener(e -> {
@@ -195,7 +200,7 @@ public class CollectionPanel extends JFrame {
                         int choice = JOptionPane.showConfirmDialog(
                                 this,
                                 "Remove \"" + game.getName() + "\" from "
-                                        + selectedCollection.getCollectionName() + "?",
+                                + selectedCollection.getCollectionName() + "?",
                                 "Remove Game",
                                 JOptionPane.YES_NO_OPTION
                         );
@@ -207,7 +212,7 @@ public class CollectionPanel extends JFrame {
                                 JOptionPane.showMessageDialog(
                                         this,
                                         game.getName() + " was removed from "
-                                                + selectedCollection.getCollectionName() + "."
+                                        + selectedCollection.getCollectionName() + "."
                                 );
                                 loadGames(selectedCollection.getGameList());
                             } else {
