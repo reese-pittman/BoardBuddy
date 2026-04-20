@@ -153,6 +153,7 @@ public class CollectionPanel extends JFrame {
                 }
             }
         });
+        // TODO: Rename a collection button
 
         dashboardButton.addActionListener(e -> {
             new DashPanel(new Dashboard(user)).setVisible(true);

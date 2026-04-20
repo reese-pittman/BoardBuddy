@@ -129,6 +129,8 @@ public class OutputXml {
                 Element UID = doc.createElement("UID");
                 UID.setTextContent(String.valueOf(user.getUID()));
                 userElement.appendChild(UID);
+
+                // TODO: Write collections to file here maybe?
             }
             
             // Transformer to write the xml

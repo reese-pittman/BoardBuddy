@@ -99,6 +99,7 @@ public class GameView extends JPanel {
         JButton removeFromCollection = new JButton("Remove game from collection!");
         removeFromCollection.addActionListener(e -> removeCollectionDialog(removeFromCollection));
 
+        // All bottom buttons
         JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         bottomButtons.add(leaveReviewButton);
         bottomButtons.add(addToCollection);
