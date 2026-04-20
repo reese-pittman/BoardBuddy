@@ -16,6 +16,7 @@ public class CollectionPanel extends JFrame {
     private JComboBox<String> collectionDropdown;
     private JButton dashboardButton;
     private JButton profileButton;
+    private JButton deleteCollectionButton;
     private JButton createCollectionButton;
 
     private JLabel titleLabel;
@@ -131,7 +132,7 @@ public class CollectionPanel extends JFrame {
             loadGames(newCollection.getGameList());
         });
 
-        removeCollectionButton.addActionListener(e -> {
+        deleteCollectionButton.addActionListener(e -> {
             int selectedIndex = collectionDropdown.getSelectedIndex();
 
             if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
