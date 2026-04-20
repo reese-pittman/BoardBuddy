@@ -27,6 +27,11 @@ public class Dashboard {
 
     }
 
+    public User getUser() {
+    return user;
+    }
+
+
     /**
      * Picks the collection to show on dashboard startup.
      *
