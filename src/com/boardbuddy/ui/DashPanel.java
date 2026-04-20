@@ -30,7 +30,6 @@ public class DashPanel extends JFrame {
 
         allDatabaseGames = (master != null) ? master.getGameList() : new ArrayList<>();
 
-
         setTitle("BoardBuddy Dashboard");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,11 +87,12 @@ public class DashPanel extends JFrame {
         });
 
         collectionsButton.addActionListener(e -> {
-            openCollectionsMenu();
+            new CollectionPanel(dashboard.getUser().getUsersCollections()).setVisible(true);
+            dispose();
         });
 
         profileButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Go to Profile Page");
+            JOptionPane.showMessageDialog(this, "Connect profile navigation here.");
         });
     }
 
@@ -129,7 +129,7 @@ public class DashPanel extends JFrame {
             titleLabel.setText(dashboard.getActiveCollectionName());
             loadGames(games);
         }
-        
+
     }
 
 }

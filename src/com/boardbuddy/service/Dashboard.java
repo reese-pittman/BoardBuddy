@@ -21,6 +21,11 @@ public class Dashboard {
         this.activeCollection = chooseDefaultCollection();
     }
 
+    public User getUser() {
+    return user;
+    }
+
+
     /**
      * Picks the collection to show on dashboard startup.
      *
