@@ -100,7 +100,9 @@ public class Dashboard {
     }
 
     /**
-     * Called when user searches.
+     * Called when user searches. 
+     * // TODO: Be able to sort/seach with things other than alphabetical
+     * // TODO: Can pass in a value and use a switch statement to figure out how you are searching/sorting
      */
     public ArrayList<BoardGame> onSearch(String query, ArrayList<BoardGame> allDatabaseGames) {
         this.activeSearchQuery = (query == null) ? "" : query.trim().toLowerCase();
