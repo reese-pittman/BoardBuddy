@@ -1,10 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<reviews>
-    <review>
-        <title>GREAT BAD GAME</title>
-        <description>Catan is a great strategy game but I have no friends to play with.</description>
-        <rating>4</rating>
-        <userID>-1</userID>
-        <gameID>13</gameID>
-    </review>
-</reviews>
+<reviews/>
