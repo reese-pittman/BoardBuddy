@@ -31,7 +31,7 @@ public class Dashboard {
     return user;
     }
 
-
+    
     /**
      * Picks the collection to show on dashboard startup.
      *
@@ -45,21 +45,25 @@ public class Dashboard {
             return null;
         }
 
-        for (Collection collection : usersCollections) {
-            if (collection != null &&
-                collection.getGameList() != null &&
-                !collection.getGameList().isEmpty()) {
-                return collection;
-            }
-        }
+        ////////////////////////// Change functionallity because it just looked the same as the collections 
+        //
+        //
+        // 
+        // for (Collection collection : usersCollections) {
+        //     if (collection != null &&
+        //         collection.getGameList() != null &&
+        //         !collection.getGameList().isEmpty()) {
+        //         return collection;
+        //     }
+        // }
 
-        for (Collection collection : usersCollections) {
-            if (collection != null &&
-                collection.getCollectionName() != null &&
-                collection.getCollectionName().equalsIgnoreCase("Favorites")) {
-                return collection;
-            }
-        }
+        // for (Collection collection : usersCollections) {
+        //     if (collection != null &&
+        //         collection.getCollectionName() != null &&
+        //         collection.getCollectionName().equalsIgnoreCase("Favorites")) {
+        //         return collection;
+        //     }
+        // }
 
         return null;
     }
@@ -96,7 +100,9 @@ public class Dashboard {
     }
 
     /**
-     * Called when user searches.
+     * Called when user searches. 
+     * // TODO: Be able to sort/seach with things other than alphabetical
+     * // TODO: Can pass in a value and use a switch statement to figure out how you are searching/sorting
      */
     public ArrayList<BoardGame> onSearch(String query, ArrayList<BoardGame> allDatabaseGames) {
         this.activeSearchQuery = (query == null) ? "" : query.trim().toLowerCase();
@@ -137,7 +143,7 @@ public class Dashboard {
         JFrame sFrame = new JFrame(game.getName());
         sFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         sFrame.add(selected);
-        sFrame.setSize(420,380);
+        sFrame.setSize(900,600);
         sFrame.setLocationRelativeTo(null);
         sFrame.setVisible(true);
     }
