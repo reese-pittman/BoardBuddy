@@ -1,5 +1,7 @@
 package com.boardbuddy.persistence;
 
+import com.boardbuddy.model.BoardGame;
+import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
 import com.boardbuddy.model.User;
 import java.io.*;
@@ -11,9 +13,9 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
 public class OutputXml {
+
     private static final String REVIEW_PATH = "reviews.xml";
     private static final String USER_PATH = "users.xml";
-
 
     /**
      * Function to run all other save functions.
@@ -25,30 +27,33 @@ public class OutputXml {
 
     /**
      * Function to write reviews to an xml file.
-     * 
-     * This one had a lot of trial and error because of exception handling, I hate it.
-     * 
+     *
+     * This one had a lot of trial and error because of exception handling, I
+     * hate it.
+     *
      */
     public static void saveReviews() {
 
         try {
             File reviewFile = new File(REVIEW_PATH);
-            
+
             ArrayList<Review> reviewList = Review.getReviews();
-            
+
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.newDocument();
-            
+
             // Reviews root dir
             Element root = doc.createElement("reviews");
             doc.appendChild(root);
-            
+
             for (Review review : reviewList) {
-                if (review == null) return;
+                if (review == null) {
+                    return;
+                }
                 // Review sub dir
                 Element reviewElement = doc.createElement("review");
                 root.appendChild(reviewElement);
-                
+
                 // Review title sub dir under review
                 Element title = doc.createElement("title");
                 title.setTextContent(review.getTitle());
@@ -70,7 +75,7 @@ public class OutputXml {
                 gameID.setTextContent(String.valueOf(review.getGameID()));
                 reviewElement.appendChild(gameID);
             }
-            
+
             // Transformer to write the xml
             Transformer transformer = null;
             try {
@@ -78,12 +83,14 @@ public class OutputXml {
             } catch (TransformerConfigurationException ex) {
                 System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
-            if (transformer == null) return;
+            if (transformer == null) {
+                return;
+            }
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            
+
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(reviewFile);
-            
+
             try {
                 transformer.transform(source, result);
             } catch (TransformerException ex) {
@@ -98,25 +105,27 @@ public class OutputXml {
      * Function to save the userList to an xml File
      */
     public static void saveUsers() {
-        
+
         try {
             File userFile = new File(USER_PATH);
-            
+
             ArrayList<User> userList = User.getUserList();
-            
+
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.newDocument();
-            
+
             // Users root dir
             Element root = doc.createElement("users");
             doc.appendChild(root);
-            
+
             for (User user : userList) {
-                if (user == null) return;
+                if (user == null) {
+                    return;
+                }
                 // Review sub dir
                 Element userElement = doc.createElement("user");
                 root.appendChild(userElement);
-                
+
                 // Review username sub dir under review
                 Element username = doc.createElement("username");
                 username.setTextContent(user.getUsername());
@@ -129,8 +138,43 @@ public class OutputXml {
                 Element UID = doc.createElement("UID");
                 UID.setTextContent(String.valueOf(user.getUID()));
                 userElement.appendChild(UID);
+
+                // Collections block inside each user
+                Element collectionsElement = doc.createElement("collections");
+                userElement.appendChild(collectionsElement);
+                
+                //for each collection, save the name and then the list of gameIDs in that collection
+                for (Collection collection : user.getUsersCollections()) {
+                    if (collection == null) {
+                        continue;
+                    }
+
+                    Element collectionElement = doc.createElement("collection");
+                    collectionsElement.appendChild(collectionElement);
+
+                    Element collectionName = doc.createElement("collectionName");
+                    collectionName.setTextContent(collection.getCollectionName());
+                    collectionElement.appendChild(collectionName);
+
+                    // Games block inside each collection
+                    Element gamesElement = doc.createElement("games");
+                    collectionElement.appendChild(gamesElement);
+
+                    //this save the game IDs in the collection, we will use this for the import
+                    for (BoardGame game : collection.getGameList()) {
+                        if (game == null) {
+                            continue;
+                        }
+
+                        Element gameElement = doc.createElement("game");
+                        // Just save the ID — look up full details from API/cache on load
+                        gameElement.setTextContent(String.valueOf(game.getId()));
+                        gamesElement.appendChild(gameElement);
+                    }
+                }
+
             }
-            
+
             // Transformer to write the xml
             Transformer transformer = null;
             try {
@@ -138,12 +182,14 @@ public class OutputXml {
             } catch (TransformerConfigurationException ex) {
                 System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
-            if (transformer == null) return;
+            if (transformer == null) {
+                return;
+            }
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            
+
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(userFile);
-            
+
             try {
                 transformer.transform(source, result);
             } catch (TransformerException ex) {
