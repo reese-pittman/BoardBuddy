@@ -15,6 +15,9 @@ public class InputXml {
 
     /**
      * Parses the input file by calling a handler depending on what the file contains.
+     * This is a collection class, you can just call parse for any file. If importing a list of games it will return a collection,
+     * else returns null.
+     * Reviews and Users will return null, but make their own internal arraylist of objects respectively.
      * 
      * @param fileIn
      * @param collectionName
@@ -55,6 +58,9 @@ public class InputXml {
     }
 
     /**
+     * Fucnction to import the master game list.
+     * Make a new boardgame object for each game instance, 
+     * then adds the object to a collection, in this case being the mastergamelist.
      * 
      * @param doc
      * @param collectionName
@@ -90,6 +96,8 @@ public class InputXml {
     }
 
     /**
+     * Function to handle review imports.
+     * Just reads the file and makes a new review object for each instance.
      * 
      * @param doc
      */
@@ -106,6 +114,7 @@ public class InputXml {
             int userID = parseTextContent(el, "userID");
             int gameID = Integer.parseInt(getTextContent(el, "gameID"));
  
+            // New review object and adding that to the arraylist of reviews
             Review review = new Review(title, description, rating, userID, gameID);
             Review.addReview(review);
             count++;
@@ -115,6 +124,8 @@ public class InputXml {
     }
 
     /**
+     * Function to handle users import,
+     * will also handle importting collections becuase collections must be tied to users.
      * 
      * @param doc
      */
@@ -129,10 +140,20 @@ public class InputXml {
             String password = getTextContent(el, "password");
 
             // TODO: hash password before storing in production (this is a maybe, for now it is just a string)
+
  
             @SuppressWarnings("unused")
             User newUser = new User(username, password, i);
-            // User.addUser(newUser);
+
+            // TODO: Read collections from file here maybe?
+            String collectionName = getTextContent(el, "collectionName");
+            Collection newCollection = new Collection(collectionName, i);
+            // TODO: Read Game list from file
+            // TODO: Add each game from file to collection
+            newUser.addGameCollection(newCollection);
+            
+
+            // User.addUser(newUser); // This is done in the constructor now 
             count++;
         }
  

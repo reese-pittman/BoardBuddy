@@ -16,6 +16,7 @@ public class CollectionPanel extends JFrame {
     private JComboBox<String> collectionDropdown;
     private JButton dashboardButton;
     private JButton profileButton;
+    private JButton deleteCollectionButton;
     private JButton createCollectionButton;
 
     private JLabel titleLabel;
@@ -45,6 +46,7 @@ public class CollectionPanel extends JFrame {
         dashboardButton = new JButton("Dashboard");
         profileButton = new JButton("Profile");
         createCollectionButton = new JButton("Create Collection");
+        deleteCollectionButton = new JButton("Delete Collection");
 
         loadCollectionNames();
 
@@ -53,7 +55,7 @@ public class CollectionPanel extends JFrame {
         navPanel.add(createCollectionButton);
         navPanel.add(dashboardButton);
         navPanel.add(profileButton);
-
+        navPanel.add(deleteCollectionButton);
         topPanel.add(navPanel, BorderLayout.EAST);
 
         add(topPanel, BorderLayout.NORTH);
@@ -130,6 +132,29 @@ public class CollectionPanel extends JFrame {
             loadGames(newCollection.getGameList());
         });
 
+        deleteCollectionButton.addActionListener(e -> {
+            int selectedIndex = collectionDropdown.getSelectedIndex();
+
+            if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
+                Collection selectedCollection = userCollections.get(selectedIndex);
+
+                int choice = JOptionPane.showConfirmDialog(
+                        this,
+                        "Are you sure you want to delete the collection \""
+                        + selectedCollection.getCollectionName() + "\"?",
+                        "Delete Collection",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (choice == JOptionPane.YES_OPTION) {
+                    user.deleteGameCollection(selectedCollection);
+                    loadCollectionNames();
+                    setDefaultCollection();
+                }
+            }
+        });
+        // TODO: Rename a collection button
+
         dashboardButton.addActionListener(e -> {
             new DashPanel(new Dashboard(user)).setVisible(true);
             dispose();
@@ -192,39 +217,15 @@ public class CollectionPanel extends JFrame {
                 gameButton.setPreferredSize(new Dimension(200, 100));
 
                 gameButton.addActionListener(e -> {
-                    int selectedIndex = collectionDropdown.getSelectedIndex();
+                    GameView selected = new GameView(user, game.getId());
+                    selected.setGame(game);
 
-                    if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
-                        Collection selectedCollection = userCollections.get(selectedIndex);
-
-                        int choice = JOptionPane.showConfirmDialog(
-                                this,
-                                "Remove \"" + game.getName() + "\" from "
-                                + selectedCollection.getCollectionName() + "?",
-                                "Remove Game",
-                                JOptionPane.YES_NO_OPTION
-                        );
-
-                        if (choice == JOptionPane.YES_OPTION) {
-                            boolean removed = selectedCollection.removeGame(game);
-
-                            if (removed) {
-                                JOptionPane.showMessageDialog(
-                                        this,
-                                        game.getName() + " was removed from "
-                                        + selectedCollection.getCollectionName() + "."
-                                );
-                                loadGames(selectedCollection.getGameList());
-                            } else {
-                                JOptionPane.showMessageDialog(
-                                        this,
-                                        "Could not remove game.",
-                                        "Error",
-                                        JOptionPane.ERROR_MESSAGE
-                                );
-                            }
-                        }
-                    }
+                    JFrame sFrame = new JFrame(game.getName());
+                    sFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    sFrame.add(selected);
+                    sFrame.setSize(900,600);
+                    sFrame.setLocationRelativeTo(null);
+                    sFrame.setVisible(true);
                 });
 
                 gamesPanel.add(gameButton);

@@ -32,6 +32,10 @@ public class User {
         return userList;
     }
 
+    public void deleteGameCollection(Collection collection) {
+        gameCollections.remove(collection);
+    }
+
     // Setters
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;

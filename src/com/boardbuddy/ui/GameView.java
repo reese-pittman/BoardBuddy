@@ -5,7 +5,10 @@ import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
 import com.boardbuddy.model.User;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GameView extends JPanel {
@@ -22,6 +25,8 @@ public class GameView extends JPanel {
     private final JLabel idLabel;
     private final JPanel reviewListPanel;
 
+    public static final int IMAGE_SIZE = 160;
+
     /**
      * Creates the gameview screen and opens the review screen.
      * 
@@ -32,8 +37,11 @@ public class GameView extends JPanel {
 
         GameView.currentUser = currentUser;
         uid = currentUser.getUID();
+
         setLayout(new BorderLayout(0, 12));
         setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        // setSize(900, 600);
+        
 
         // ── Top bar: back button ─────────────────────────────────────────────
         JPanel topBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -44,15 +52,15 @@ public class GameView extends JPanel {
         topBar.add(backButton);
 
         // ── Game info row ────────────────────────────────────────────────────
-        JPanel infoRow = new JPanel(new BorderLayout(12, 0));
+        JPanel infoRow = new JPanel(new BorderLayout(16, 0));
 
         imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(100, 100));
+        imageLabel.setPreferredSize(new Dimension(IMAGE_SIZE, IMAGE_SIZE));
         imageLabel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setText("No Image");
 
-        JPanel infoPanel = new JPanel(new GridLayout(5, 1, 0, 4));
+        JPanel infoPanel = new JPanel(new GridLayout(5, 1, 0, 6));
         nameLabel    = new JLabel("Name: —");
         yearLabel    = new JLabel("Year: —");
         playersLabel = new JLabel("Players: —");
@@ -77,9 +85,10 @@ public class GameView extends JPanel {
         reviewListPanel.add(new JLabel("No reviews yet."));
 
         JScrollPane scrollPane = new JScrollPane(reviewListPanel);
-        scrollPane.setPreferredSize(new Dimension(0, 120));
+        scrollPane.setPreferredSize(new Dimension(0, 160));
         scrollPane.setBorder(null);
 
+        ///// Action Listeners
         JButton leaveReviewButton = new JButton("Leave a Review");
         leaveReviewButton.addActionListener(e -> showReviewDialog(uid, game));
 
@@ -90,8 +99,10 @@ public class GameView extends JPanel {
         // Remove from collection
         JButton removeFromCollection = new JButton("Remove game from collection!");
         removeFromCollection.addActionListener(e -> removeCollectionDialog(removeFromCollection));
+        /////
 
-        JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        // All bottom buttons
+        JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
         bottomButtons.add(leaveReviewButton);
         bottomButtons.add(addToCollection);
         bottomButtons.add(removeFromCollection);
@@ -335,6 +346,47 @@ public class GameView extends JPanel {
         reviewListPanel.repaint();
     }
 
+    /**
+     * Loads the image of the passed url
+     * 
+     * @param url url of desired image
+     */
+    private void loadImage(String url) {
+        // Make sure url is valid
+        if (url == null || url.isBlank()) {
+            imageLabel.setIcon(null);
+            imageLabel.setText("No Image");
+            return;
+        }
+
+        try {
+            // We have to connect to the web to make sure images load I think, this is confusing me
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) URI.create(url).toURL().openConnection();
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+            conn.connect();
+
+            BufferedImage raw = ImageIO.read(conn.getInputStream());
+            if (raw == null) {
+                System.err.println("ImageIO.read returned null for: " + url);
+                imageLabel.setIcon(null);
+                imageLabel.setText("No Image");
+                return;
+            }
+            Image scaled = raw.getScaledInstance(IMAGE_SIZE, IMAGE_SIZE, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(scaled));
+            imageLabel.setText(null);
+        } catch (Exception ex) {
+            System.err.println("Image load failed: " + ex);
+            imageLabel.setIcon(null);
+            imageLabel.setText("No Image");
+        }
+    }
+
+    /**
+     * Sets the current game that is clicked
+     * 
+     * @param game desired game to load
+     */
     public void setGame(BoardGame game) {
         this.currentGame = game;
         if (game == null) {
@@ -362,11 +414,21 @@ public class GameView extends JPanel {
 
         imageLabel.setIcon(null);
         imageLabel.setText("Loading...");
+
+        loadImage(game.getThumbnail());
     }
 
+    /**
+     * Main function to test gameview, manually creates catan game. 
+     * Also manually makes a review and test user to work with.
+     * DOES NOT WORK WITH IMAGES
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            BoardGame catan = new BoardGame(13, "Catan", 3, 4, 120, 1995, "image", null);
+            BoardGame catan = new BoardGame(13, "Catan", 3, 4, 120, 1995, 
+            "https://cf.geekdo-images.com/W3Bsga_uLP9kO91gZ7H8yw__thumb/img/8a9HeqFydO7Uun_le9bXWPnidcA=/fit-in/200x150/filters:strip_icc()/pic2419375.jpg", null);
             submitReview("GREAT BAD GAME","Catan is a great strategy game but I have no friends to play with.",
                 4, -1, 13);
 
@@ -383,7 +445,7 @@ public class GameView extends JPanel {
             panel.setGame(catan);
 
             frame.add(panel);
-            frame.setSize(420, 380);
+            frame.setSize(900, 600);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });

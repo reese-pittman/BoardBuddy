@@ -49,4 +49,11 @@
         <userID>1</userID>
         <gameID>1406</gameID>
     </review>
+    <review>
+        <title>Star War</title>
+        <description>It's a star war man!</description>
+        <rating>5</rating>
+        <userID>5</userID>
+        <gameID>374173</gameID>
+    </review>
 </reviews>

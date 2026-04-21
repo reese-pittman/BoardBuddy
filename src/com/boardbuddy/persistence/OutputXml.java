@@ -23,6 +23,7 @@ public class OutputXml {
     public static void saveAll() {
         saveReviews();
         saveUsers();
+        System.out.println("Saving...");
     }
 
     /**

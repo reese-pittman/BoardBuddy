@@ -25,4 +25,9 @@
         <password>bert</password>
         <UID>4</UID>
     </user>
+    <user>
+        <username>nuggett</username>
+        <password>guggett</password>
+        <UID>5</UID>
+    </user>
 </users>

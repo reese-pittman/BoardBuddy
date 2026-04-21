@@ -1,6 +1,5 @@
 package com.boardbuddy.model;
 
-import com.boardbuddy.persistence.OutputXml;
 import java.util.ArrayList;
 
 //Class to represent a review for a board game
@@ -37,9 +36,6 @@ public class Review {
      */
     public static void addReview(Review newReview){
         reviewList.add(newReview);
-        
-        // TODO: TESTING ONLY; saving will be done when loading dashboard and logout
-        OutputXml.saveReviews();
     }
     
     

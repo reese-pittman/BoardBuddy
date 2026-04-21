@@ -73,7 +73,7 @@ public class LoginBackend implements ActionListener {
      * @param username the username entered 
      * @param password the password enetered 
      */
-    public void checkCredentials(String username, String password) {
+    public void checkCredentials(String username, String password) { // TODO: Only checks for the first user of a username
         try {
             User user = User.fetchUser(username); // fetch the user from userlist
             if (user != null && checkPassword(user, password)) {
