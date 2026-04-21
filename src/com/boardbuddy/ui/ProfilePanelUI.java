@@ -145,9 +145,6 @@ public class ProfilePanelUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid Password", "Error Title", JOptionPane.ERROR_MESSAGE);
         }
     });
-
-
-   
     }
      public static void main(String[] args) {
         User testU = new User("test", "pass", 101010);
