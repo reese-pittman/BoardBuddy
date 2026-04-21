@@ -57,6 +57,7 @@ public class ProfilePanelUI extends JFrame {
 
         buttonPanel.add(collectionButton, BorderLayout.NORTH);
         buttonPanel.add(dashboardButton);
+        buttonPanel.add(logoutButton);
 
 
         topPanel.add(buttonPanel, BorderLayout.EAST);

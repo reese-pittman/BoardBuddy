@@ -4,10 +4,6 @@
         <username>test</username>
         <password>pass</password>
         <UID>101010</UID>
-    </user>
-    <user>
-        <username>nuggett</username>
-        <password>guggett</password>
-        <UID>5</UID>
+        <collections/>
     </user>
 </users>
