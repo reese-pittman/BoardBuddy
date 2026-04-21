@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
     <user>
+        <username>beans</username>
+        <password>6969</password>
+        <UID>0</UID>
+    </user>
+    <user>
         <username>test</username>
         <password>pass</password>
-        <UID>101010</UID>
+        <UID>1</UID>
+    </user>
+    <user>
+        <username>bloo</username>
+        <password>chicken</password>
+        <UID>2</UID>
+    </user>
+    <user>
+        <username>norp</username>
+        <password>gleep</password>
+        <UID>3</UID>
+    </user>
+    <user>
+        <username>herb</username>
+        <password>bert</password>
+        <UID>4</UID>
+    </user>
+    <user>
+        <username>nuggett</username>
+        <password>guggett</password>
+        <UID>5</UID>
     </user>
 </users>

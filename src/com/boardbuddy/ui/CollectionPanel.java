@@ -217,39 +217,15 @@ public class CollectionPanel extends JFrame {
                 gameButton.setPreferredSize(new Dimension(200, 100));
 
                 gameButton.addActionListener(e -> {
-                    int selectedIndex = collectionDropdown.getSelectedIndex();
+                    GameView selected = new GameView(user, game.getId());
+                    selected.setGame(game);
 
-                    if (selectedIndex >= 0 && selectedIndex < userCollections.size()) {
-                        Collection selectedCollection = userCollections.get(selectedIndex);
-
-                        int choice = JOptionPane.showConfirmDialog(
-                                this,
-                                "Remove \"" + game.getName() + "\" from "
-                                + selectedCollection.getCollectionName() + "?",
-                                "Remove Game",
-                                JOptionPane.YES_NO_OPTION
-                        );
-
-                        if (choice == JOptionPane.YES_OPTION) {
-                            boolean removed = selectedCollection.removeGame(game);
-
-                            if (removed) {
-                                JOptionPane.showMessageDialog(
-                                        this,
-                                        game.getName() + " was removed from "
-                                        + selectedCollection.getCollectionName() + "."
-                                );
-                                loadGames(selectedCollection.getGameList());
-                            } else {
-                                JOptionPane.showMessageDialog(
-                                        this,
-                                        "Could not remove game.",
-                                        "Error",
-                                        JOptionPane.ERROR_MESSAGE
-                                );
-                            }
-                        }
-                    }
+                    JFrame sFrame = new JFrame(game.getName());
+                    sFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    sFrame.add(selected);
+                    sFrame.setSize(900,600);
+                    sFrame.setLocationRelativeTo(null);
+                    sFrame.setVisible(true);
                 });
 
                 gamesPanel.add(gameButton);
