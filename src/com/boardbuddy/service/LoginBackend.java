@@ -87,7 +87,10 @@ public class LoginBackend implements ActionListener {
     }
 
 
-    // Logout function
+    /**
+     *  Creates a log out button that will save the users information and bring them back to the login screen
+     * @param parent  the window that the confirmation dialog box belongs to
+     */
     public static void LogOut(Component parent) {
         int choice = JOptionPane.showConfirmDialog(
             parent,

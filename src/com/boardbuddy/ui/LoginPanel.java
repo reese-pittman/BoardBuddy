@@ -69,7 +69,10 @@ public class LoginPanel extends JFrame implements ActionListener {
         setLocationRelativeTo(null);    // 3. centers on screen
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+/**
+ * Handles button click events on the login screen.
+ * @param e the event triggered by the user clicking a button
+ */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == regisButton) {
@@ -112,6 +115,11 @@ public class LoginPanel extends JFrame implements ActionListener {
         failMessage.setText(message);
     }
 
+/**
+ * Entry point of the BoardBuddy application.
+ * Creates an instance of LoginBackend to launch the login screen.
+ * @param args command line arguments (not used)
+ */
     public static void main(String[] args) {
         @SuppressWarnings("unused")
         LoginBackend f = new LoginBackend();
