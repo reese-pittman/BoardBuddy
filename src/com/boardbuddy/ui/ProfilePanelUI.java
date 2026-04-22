@@ -120,6 +120,7 @@ public class ProfilePanelUI extends JFrame {
         add(centerPanel, BorderLayout.CENTER);
 //--------------------Event Handlers---------------------------------------//
      collectionButton.addActionListener(e -> {
+        // This line causes an issue with searching in your collection, ONLY when going from ProfileUI -> CollectionUI
         backend.openCollections(currentUser.getUsersCollections(), currentUser, this);
     });
    
