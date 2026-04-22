@@ -22,6 +22,10 @@ public class DashPanel extends JFrame {
     private JLabel titleLabel;
     private JPanel gamesPanel;
 
+    /**
+     * Constructor for the DashPanel class
+     * @param dashboard The dashboard service
+     */
     public DashPanel(Dashboard dashboard) {
         this.dashboard = dashboard;
 
@@ -85,6 +89,11 @@ public class DashPanel extends JFrame {
         add(centerPanel, BorderLayout.CENTER);
 
         // ─── Event Handlers ─────────────────────────────────────
+
+        /**
+         * Search functionality: When the user types in the search field and presses Enter, we want to filter the games displayed based on the search query.
+         * The Dashboard service will handle the actual search logic and return a filtered list of games.
+         */
         searchField.addActionListener(e -> {
             String query = searchField.getText();
             ArrayList<BoardGame> filteredGames = dashboard.onSearch(query, allDatabaseGames);
@@ -104,6 +113,10 @@ public class DashPanel extends JFrame {
 
     }
 
+    /**
+     * Loads the specified list of games into the games panel.
+     * @param games The list of games to display.
+     */
     private void loadGames(ArrayList<BoardGame> games) {
         gamesPanel.removeAll();
 
@@ -126,6 +139,9 @@ public class DashPanel extends JFrame {
         gamesPanel.repaint();
     }
 
+    /**
+     * Opens the collections menu for the user to select a collection.
+     */
     private void openCollectionsMenu() {
         String collectionName = JOptionPane.showInputDialog(
                 this,

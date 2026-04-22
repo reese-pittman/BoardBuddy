@@ -10,6 +10,15 @@ public class User {
     private final static ArrayList<User> userList = new ArrayList<>();
     private final ArrayList<Collection> gameCollections; // Users can have multiple collections of games
 
+    /**
+     * Constructor for the User Class
+     * 
+     * @param username
+     * @param passwordHash
+     * @param userID
+     */
+
+
     public User(String username, String passwordHash, int userID) {
         this.username = username;
         this.passwordHash = passwordHash;
