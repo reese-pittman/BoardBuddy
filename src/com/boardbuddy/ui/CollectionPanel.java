@@ -47,7 +47,7 @@ public class CollectionPanel extends JFrame {
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         collectionDropdown = new JComboBox<>();
-        searchField = new JTextField(20);
+        searchField = new JTextField(10);
         dashboardButton = new JButton("Dashboard");
         profileButton = new JButton("Profile");
         createCollectionButton = new JButton("Create Collection");
