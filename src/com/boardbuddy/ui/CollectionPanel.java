@@ -4,6 +4,7 @@ import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.service.Dashboard;
+import com.boardbuddy.ui.ProfilePanelUI;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -161,7 +162,8 @@ public class CollectionPanel extends JFrame {
         });
 
         profileButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Connect profile navigation here.");
+            new ProfilePanelUI(user).setVisible(true);
+            dispose();
         });
     }
 
