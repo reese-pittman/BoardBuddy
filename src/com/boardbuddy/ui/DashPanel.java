@@ -13,7 +13,7 @@ import javax.swing.*;
 public class DashPanel extends JFrame {
 
     private final Dashboard dashboard;
-    private final ArrayList<BoardGame> allDatabaseGames;
+    final ArrayList<BoardGame> allDatabaseGames;
 
     private JTextField searchField;
     private JButton collectionsButton;

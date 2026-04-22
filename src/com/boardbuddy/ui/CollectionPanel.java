@@ -4,15 +4,15 @@ import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.service.Dashboard;
-import com.boardbuddy.ui.ProfilePanelUI;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
 public class CollectionPanel extends JFrame {
-
     private final ArrayList<Collection> userCollections;
     private final User user;
+    private Dashboard dashboard;
+
 
     private JComboBox<String> collectionDropdown;
     private JButton dashboardButton;
@@ -40,6 +40,8 @@ public class CollectionPanel extends JFrame {
         setLayout(new BorderLayout());
 
         // Top bar
+        // Adding a drop box to sort though the games 
+        JComboBox<String> sortBox = new JComboBox<>(new String[]{"Default", "Min Players", "Max Players", "Year", "Play Time"});
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -58,6 +60,8 @@ public class CollectionPanel extends JFrame {
         navPanel.add(profileButton);
         navPanel.add(deleteCollectionButton);
         topPanel.add(navPanel, BorderLayout.EAST);
+        navPanel.add(new JLabel("Sort by:"));
+        navPanel.add(sortBox);
 
         add(topPanel, BorderLayout.NORTH);
 
@@ -165,6 +169,32 @@ public class CollectionPanel extends JFrame {
             new ProfilePanelUI(user).setVisible(true);
             dispose();
         });
+
+    
+    // action listner for the drop box
+    sortBox.addActionListener(e -> {
+        int selectedIndex = collectionDropdown.getSelectedIndex();
+
+        if (selectedIndex < 0 || selectedIndex >= userCollections.size()) return;
+        ArrayList<BoardGame> sorted = new ArrayList<>(userCollections.get(selectedIndex).getGameList());
+
+        String selected = (String) sortBox.getSelectedItem();
+        switch (selected) {
+            case "Min Players":
+                sorted.sort((a, b) -> a.getMinPlayers() - b.getMinPlayers());
+                break;
+            case "Max Players":
+                sorted.sort((a, b) -> a.getMaxPlayers() - b.getMaxPlayers());
+                break;
+            case "Year":
+                sorted.sort((a, b) -> a.getYear() - b.getYear());
+                break;
+            case "Play Time":
+                sorted.sort((a, b) -> a.getPlayTime() - b.getPlayTime());
+            break;
+        }
+
+        loadGames(sorted);   });
     }
 
     private void loadCollectionNames() {
@@ -238,3 +268,4 @@ public class CollectionPanel extends JFrame {
         gamesPanel.repaint();
     }
 }
+

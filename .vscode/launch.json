@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.boardbuddy.Main",
+            "projectName": "BoardBuddy_78942605"
+        },
+        {
+            "type": "java",
             "name": "ProfilePanelUI",
             "request": "launch",
             "mainClass": "com.boardbuddy.ui.ProfilePanelUI",
