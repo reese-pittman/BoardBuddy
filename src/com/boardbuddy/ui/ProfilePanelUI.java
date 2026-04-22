@@ -1,19 +1,18 @@
 package com.boardbuddy.ui;
 
 
+import com.boardbuddy.model.User;
+import com.boardbuddy.service.LoginBackend;
+import com.boardbuddy.service.ProfilePanelBackend;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import com.boardbuddy.model.User;
-import com.boardbuddy.service.ProfilePanelBackend;
 
 
 public class ProfilePanelUI extends JFrame {
@@ -25,6 +24,7 @@ public class ProfilePanelUI extends JFrame {
     private JLabel profileLabel;
     private JButton passwordButton;
     private JButton usernameButton;
+    private JButton logoutButton;
     private Font font;
     private ProfilePanelBackend backend = new ProfilePanelBackend();
 
@@ -58,10 +58,11 @@ public class ProfilePanelUI extends JFrame {
 
         collectionButton = new JButton("Collections");
         dashboardButton = new JButton("Dashboard");
-
+        logoutButton = new JButton("Logout");
 
         buttonPanel.add(collectionButton, BorderLayout.NORTH);
         buttonPanel.add(dashboardButton);
+        buttonPanel.add(logoutButton);
 
 
         topPanel.add(buttonPanel, BorderLayout.EAST);
@@ -152,11 +153,19 @@ public class ProfilePanelUI extends JFrame {
                 currentUser.setPasswordHash(newPassword);
                 passwordLabel.setText("Current Password: " + currentUser.maskPassword(newPassword.length()));
 
-
         }
         else{
                 JOptionPane.showMessageDialog(null, "Invalid Password", "Error Title", JOptionPane.ERROR_MESSAGE);
         }
     });
+
+    logoutButton.addActionListener(e -> {
+        LoginBackend.LogOut(backend);
+        setVisible(false);
+        dispose();
+    });
+
+
+   
     }
 }

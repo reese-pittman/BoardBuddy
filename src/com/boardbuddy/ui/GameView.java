@@ -52,15 +52,15 @@ public class GameView extends JPanel {
         topBar.add(backButton);
 
         // ── Game info row ────────────────────────────────────────────────────
-        JPanel infoRow = new JPanel(new BorderLayout(12, 0));
+        JPanel infoRow = new JPanel(new BorderLayout(16, 0));
 
         imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(100, 100));
+        imageLabel.setPreferredSize(new Dimension(IMAGE_SIZE, IMAGE_SIZE));
         imageLabel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setText("No Image");
 
-        JPanel infoPanel = new JPanel(new GridLayout(5, 1, 0, 4));
+        JPanel infoPanel = new JPanel(new GridLayout(5, 1, 0, 6));
         nameLabel    = new JLabel("Name: —");
         yearLabel    = new JLabel("Year: —");
         playersLabel = new JLabel("Players: —");
@@ -88,6 +88,7 @@ public class GameView extends JPanel {
         scrollPane.setPreferredSize(new Dimension(0, 160));
         scrollPane.setBorder(null);
 
+        ///// Action Listeners
         JButton leaveReviewButton = new JButton("Leave a Review");
         leaveReviewButton.addActionListener(e -> showReviewDialog(uid, game));
 
@@ -98,8 +99,10 @@ public class GameView extends JPanel {
         // Remove from collection
         JButton removeFromCollection = new JButton("Remove game from collection!");
         removeFromCollection.addActionListener(e -> removeCollectionDialog(removeFromCollection));
+        /////
 
-        JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        // All bottom buttons
+        JPanel bottomButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
         bottomButtons.add(leaveReviewButton);
         bottomButtons.add(addToCollection);
         bottomButtons.add(removeFromCollection);

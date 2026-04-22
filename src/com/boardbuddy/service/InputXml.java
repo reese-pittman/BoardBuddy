@@ -5,6 +5,7 @@ import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
 import com.boardbuddy.model.User;
 import java.io.File;
+import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -15,6 +16,9 @@ public class InputXml {
 
     /**
      * Parses the input file by calling a handler depending on what the file contains.
+     * This is a collection class, you can just call parse for any file. If importing a list of games it will return a collection,
+     * else returns null.
+     * Reviews and Users will return null, but make their own internal arraylist of objects respectively.
      * 
      * @param fileIn
      * @param collectionName
@@ -55,6 +59,9 @@ public class InputXml {
     }
 
     /**
+     * Fucnction to import the master game list.
+     * Make a new boardgame object for each game instance, 
+     * then adds the object to a collection, in this case being the mastergamelist.
      * 
      * @param doc
      * @param collectionName
@@ -84,12 +91,14 @@ public class InputXml {
             count++;
         }
  
-        System.out.println("Imported " + count + " game(s) into collection \"" + collectionName + "\".");
+        // System.out.println("Imported " + count + " game(s) into collection \"" + collectionName + "\".");
 
         return collection;
     }
 
     /**
+     * Function to handle review imports.
+     * Just reads the file and makes a new review object for each instance.
      * 
      * @param doc
      */
@@ -106,6 +115,7 @@ public class InputXml {
             int userID = parseTextContent(el, "userID");
             int gameID = Integer.parseInt(getTextContent(el, "gameID"));
  
+            // New review object and adding that to the arraylist of reviews
             Review review = new Review(title, description, rating, userID, gameID);
             Review.addReview(review);
             count++;
@@ -115,24 +125,61 @@ public class InputXml {
     }
 
     /**
+     * Function to handle users import,
+     * will also handle importting collections becuase collections must be tied to users.
      * 
      * @param doc
      */
     private static void handleUsers(Document doc) {
+        // Loop through users tag until done
         NodeList userNodes = doc.getElementsByTagName("user");
         int count = 0;
  
         for (int i = 0; i < userNodes.getLength(); i++) {
-            Element el = (Element) userNodes.item(i);
+            Element us = (Element) userNodes.item(i);
  
-            String username = getTextContent(el, "username");
-            String password = getTextContent(el, "password");
+            String username = getTextContent(us, "username");
+            String password = getTextContent(us, "password");
 
             // TODO: hash password before storing in production (this is a maybe, for now it is just a string)
+
  
             @SuppressWarnings("unused")
             User newUser = new User(username, password, i);
-            // User.addUser(newUser);
+
+            // Loop through collections tag until done, same as users
+            NodeList collectionNodes = us.getElementsByTagName("collection");
+            for (int j = 0; j < collectionNodes.getLength(); j++) {
+                Element col = (Element) collectionNodes.item(j);
+
+                // Reads collection name and makes a new collection with the current uid
+                String collectionName = getTextContent(col, "collectionName");
+                Collection newCollection = new Collection(collectionName, i);
+
+                // Loops through and adds games
+                NodeList gameNodes = col.getElementsByTagName("game");
+                for (int k = 0; k < gameNodes.getLength(); k++) {
+                    // Grabbing the game element and id
+                    Element gam = (Element) gameNodes.item(k);
+                    // int gameID = parseTextContent(gam, "game");
+                    int gameID = Integer.parseInt(gam.getTextContent().trim());
+                    
+                    // Make an ArrayList of all the games to search through and fetch the gameID.
+                    // Then add the game to the new collection.
+                    Collection master = InputXml.parse("bgg90Games.xml", "Master", -1);
+                    ArrayList<BoardGame> masterGameList = master.getGameList();
+                    for (BoardGame game : masterGameList) {
+                        if (game.getId() == gameID) {
+                            newCollection.addGame(game);
+                        }
+                    }
+                }
+                // Add the new collection to the new user after all games are populated
+                newUser.addGameCollection(newCollection);
+
+            }
+            
+            // User.addUser(newUser); // This is done in the constructor now 
             count++;
         }
  

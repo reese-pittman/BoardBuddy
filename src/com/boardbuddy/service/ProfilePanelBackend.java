@@ -1,5 +1,12 @@
 package com.boardbuddy.service;
 
+import com.boardbuddy.ui.DashPanel;
+import com.boardbuddy.model.User;
+import com.boardbuddy.ui.CollectionPanel;
+import com.boardbuddy.model.Collection;
+
+
+import java.util.ArrayList;
 
 import com.boardbuddy.ui.DashPanel;
 import com.boardbuddy.model.User;

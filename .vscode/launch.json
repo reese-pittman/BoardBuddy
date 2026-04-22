@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ProfilePanelUI",
+            "request": "launch",
+            "mainClass": "com.boardbuddy.ui.ProfilePanelUI",
+            "projectName": "BoardBuddy_22e9297b"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.boardbuddy.Main",
+            "projectName": "BoardBuddy_22e9297b"
+        },
+        {
+            "type": "java",
+            "name": "GameView",
+            "request": "launch",
+            "mainClass": "com.boardbuddy.ui.GameView",
+            "projectName": "BoardBuddy_7ae264e1"
+        },
+        {
+            "type": "java",
+            "name": "ProfilePanelUI",
+            "request": "launch",
+            "mainClass": "com.boardbuddy.ui.ProfilePanelUI",
+            "projectName": "BoardBuddy_7ae264e1"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.boardbuddy.Main",
+            "projectName": "BoardBuddy_7ae264e1"
+        },
+        {
+            "type": "jdk",
+            "request": "launch",
+            "name": "Launch Java App"
+        }
+    ]
+}

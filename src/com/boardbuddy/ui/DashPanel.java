@@ -148,6 +148,8 @@ public class DashPanel extends JFrame {
 
                 gameButton.addActionListener(e -> {
                     dashboard.onGameSelected(game);
+                    // dispose();
+
                 });
 
                 gamesPanel.add(gameButton);
