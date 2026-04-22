@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
     <user>
-        <username>test123</username>
+        <username>test</username>
         <password>pass</password>
         <UID>0</UID>
         <collections>
@@ -11,6 +11,8 @@
                     <game>1927</game>
                     <game>41114</game>
                     <game>5048</game>
+                    <game>1406</game>
+                    <game>320</game>
                 </games>
             </collection>
             <collection>
@@ -18,6 +20,7 @@
                 <games>
                     <game>312786</game>
                     <game>312484</game>
+                    <game>2136</game>
                 </games>
             </collection>
             <collection>
@@ -33,6 +36,7 @@
                 <games>
                     <game>146508</game>
                     <game>277659</game>
+                    <game>1406</game>
                 </games>
             </collection>
         </collections>

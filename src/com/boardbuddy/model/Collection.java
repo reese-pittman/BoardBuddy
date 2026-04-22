@@ -2,12 +2,6 @@ package com.boardbuddy.model;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
-import com.boardbuddy.service.Dashboard;
-import com.boardbuddy.ui.DashPanel;
-import com.boardbuddy.ui.ProfilePanelUI;
-
 //this will handle the user data and information
 public class Collection {
     private String collectionName;

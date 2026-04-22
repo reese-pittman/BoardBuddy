@@ -1,24 +1,18 @@
 package com.boardbuddy.service;
 
-import com.boardbuddy.ui.DashPanel;
+import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.ui.CollectionPanel;
-import com.boardbuddy.model.Collection;
-
-
-import java.util.ArrayList;
-
 import com.boardbuddy.ui.DashPanel;
-import com.boardbuddy.model.User;
-import com.boardbuddy.ui.CollectionPanel;
-import com.boardbuddy.model.Collection;
-
 import java.util.ArrayList;
 import javax.swing.*;
 
 
 
 public class ProfilePanelBackend extends JFrame {
+
+    private Dashboard dashboard;
+
    /**
     * opens up the dashboard and closes profile panel 
     * @param user   the current user who us log into the system 
@@ -26,7 +20,8 @@ public class ProfilePanelBackend extends JFrame {
     */
     public void openDash(User user, JFrame currentWindow) {
         currentWindow.setVisible(false);
-        Dashboard dashboard = new Dashboard(user);
+        // Dashboard dashboard = new Dashboard(user);
+        dashboard = new Dashboard(user);
         DashPanel dashPanel = new DashPanel(dashboard);
         dashPanel.setVisible(true);
     }
@@ -40,7 +35,7 @@ public class ProfilePanelBackend extends JFrame {
 
     public void openCollections(ArrayList<Collection> userCollections, User user, JFrame currentWindow){
         currentWindow.setVisible(false);
-        CollectionPanel collectionPanel = new CollectionPanel(userCollections, user);
+        CollectionPanel collectionPanel = new CollectionPanel(userCollections, user, dashboard);
         collectionPanel.setVisible(true);
     }
    

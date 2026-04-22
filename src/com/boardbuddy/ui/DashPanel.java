@@ -101,7 +101,7 @@ public class DashPanel extends JFrame {
         });
 
         collectionsButton.addActionListener(e -> {
-            new CollectionPanel(dashboard.getUser().getUsersCollections(), dashboard.getUser()).setVisible(true);
+            new CollectionPanel(dashboard.getUser().getUsersCollections(), dashboard.getUser(), dashboard).setVisible(true);
             dispose();
         });
 
