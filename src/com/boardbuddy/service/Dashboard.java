@@ -98,6 +98,9 @@ public class Dashboard {
         }
         return activeCollection.getCollectionName();
     }
+    public Collection getActiveCollection() {
+        return activeCollection;
+    }
 
     /**
      * Called when user searches. 

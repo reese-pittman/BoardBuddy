@@ -4,7 +4,6 @@ import com.boardbuddy.model.BoardGame;
 import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.User;
 import com.boardbuddy.service.Dashboard;
-import com.boardbuddy.ui.ProfilePanelUI;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -13,8 +12,10 @@ public class CollectionPanel extends JFrame {
 
     private final ArrayList<Collection> userCollections;
     private final User user;
+    private final Dashboard dashboard;
 
     private JComboBox<String> collectionDropdown;
+    private JTextField searchField;
     private JButton dashboardButton;
     private JButton profileButton;
     private JButton deleteCollectionButton;
@@ -23,9 +24,10 @@ public class CollectionPanel extends JFrame {
     private JLabel titleLabel;
     private JPanel gamesPanel;
 
-    public CollectionPanel(ArrayList<Collection> userCollections, User user) {
+    public CollectionPanel(ArrayList<Collection> userCollections, User user, Dashboard dashboard) {
         this.userCollections = userCollections;
         this.user = user;
+        this.dashboard = dashboard;
 
         setTitle("BoardBuddy Collections");
         setSize(900, 600);
@@ -44,6 +46,7 @@ public class CollectionPanel extends JFrame {
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         collectionDropdown = new JComboBox<>();
+        searchField = new JTextField(20);
         dashboardButton = new JButton("Dashboard");
         profileButton = new JButton("Profile");
         createCollectionButton = new JButton("Create Collection");
@@ -52,7 +55,7 @@ public class CollectionPanel extends JFrame {
         loadCollectionNames();
 
         topPanel.add(collectionDropdown, BorderLayout.CENTER);
-
+        navPanel.add(searchField);
         navPanel.add(createCollectionButton);
         navPanel.add(dashboardButton);
         navPanel.add(profileButton);
@@ -87,6 +90,19 @@ public class CollectionPanel extends JFrame {
                 titleLabel.setText(selectedCollection.getCollectionName());
                 loadGames(selectedCollection.getGameList());
             }
+        });
+
+        /**
+         * Searching by getting the active collection same as above, then doing the same sorting in dashboard.
+         */
+        searchField.addActionListener(e -> {
+            int selectedIndex = collectionDropdown.getSelectedIndex();
+
+            Collection selectedCollection = userCollections.get(selectedIndex);
+            ArrayList<BoardGame> activeGames = selectedCollection.getGameList();
+            String query = searchField.getText();
+            ArrayList<BoardGame> filteredGames = dashboard.onSearch(query, activeGames);
+            loadGames(filteredGames);
         });
 
         createCollectionButton.addActionListener(e -> {
