@@ -368,6 +368,8 @@ class Registration extends JFrame implements ActionListener {
                 OutputXml.saveUsers();
             } 
 
+
+            // In case the user can't be saved or the file can't be written to
             catch (Exception ex) {
                 res.setForeground(Color.RED);
                 res.setText("Error saving user.");

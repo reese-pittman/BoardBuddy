@@ -89,7 +89,8 @@ public class OutputXml {
             Transformer transformer = null;
             try {
                 transformer = TransformerFactory.newInstance().newTransformer();
-            } catch (TransformerConfigurationException ex) {
+            } 
+            catch (TransformerConfigurationException ex) {
                 System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
             if (transformer == null) {
@@ -102,10 +103,12 @@ public class OutputXml {
 
             try {
                 transformer.transform(source, result);
-            } catch (TransformerException ex) {
+            } 
+            catch (TransformerException ex) {
                 System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
-        } catch (ParserConfigurationException ex) {
+        } 
+        catch (ParserConfigurationException ex) {
             System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
