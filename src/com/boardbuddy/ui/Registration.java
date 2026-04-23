@@ -8,7 +8,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-// This program creates a user when the fields are entered and writes and reads them from an XML ●‿●
+// This class creates a user when the fields are entered and writes and reads them from an XML ●‿●
 
 
 // General logic for reference
@@ -44,7 +44,6 @@ class Registration extends JFrame implements ActionListener {
     private final JLabel genderLabel;
     private final JRadioButton male;
     private final JRadioButton female;
-    // private final JRadioButton attackchopper;
     private final ButtonGroup gengp;
 
     private final JLabel dobLabel;
@@ -147,6 +146,9 @@ class Registration extends JFrame implements ActionListener {
     private static final int FIELD_W = 200;
     private static final int FIELD_H = 25;
 
+    // Declarations and value fields 
+    // ===============================================================================================================================
+
     /**
      * Public registration method including the functions for setting the registration panel up
      */
@@ -213,6 +215,8 @@ class Registration extends JFrame implements ActionListener {
         genderLabel.setLocation(LABEL_X, 260);
         c.add(genderLabel);
 
+
+        // Creates Male button
         male = new JRadioButton("Male");
         male.setFont(new Font("Arial", Font.PLAIN, 15));
         male.setSelected(true);
@@ -220,22 +224,17 @@ class Registration extends JFrame implements ActionListener {
         male.setLocation(FIELD_X, 260);
         c.add(male);
 
+        // Creates Female button
         female = new JRadioButton("Female");
         female.setFont(new Font("Arial", Font.PLAIN, 15));
         female.setSize(80, 20);
         female.setLocation(FIELD_X + 80, 260);
         c.add(female);
 
-        // attackchopper = new JRadioButton("Attack Chopper");
-        // attackchopper.setFont(new Font("Arial", Font.PLAIN, 15));
-        // attackchopper.setSize(80, 20);
-        // attackchopper.setLocation(FIELD_X + 80, 260);
-        // c.add(attackchopper);
-
         gengp = new ButtonGroup();
         gengp.add(male);
         gengp.add(female);
-        // gengp.add(attackchopper);
+
 
         // --- Date of Birth ---
         dobLabel = new JLabel("DOB");
@@ -307,52 +306,7 @@ class Registration extends JFrame implements ActionListener {
         res.setSize(500, 25);
         res.setLocation(200, 450);
         c.add(res);
-
-        // // --- Dark mode --- (didn't align with the rest of our design language)
-        // Color bg = new Color(0x19, 0x1a, 0x1c);
-        // Color fieldBg = new Color(0x2b, 0x2b, 0x2b);
-        // Color fg = Color.WHITE;
- 
-        // c.setBackground(bg);
- 
-        // title.setForeground(fg);
-        // usernameLabel.setForeground(fg);
-        // passwordLabel.setForeground(fg);
-        // confirmPasswordLabel.setForeground(fg);
-        // genderLabel.setForeground(fg);
-        // dobLabel.setForeground(fg);
-        // res.setForeground(fg);
- 
-        // tusername.setBackground(fieldBg);
-        // tusername.setForeground(fg);
-        // tusername.setCaretColor(fg);
- 
-        // tpass.setBackground(fieldBg);
-        // tpass.setForeground(fg);
-        // tpass.setCaretColor(fg);
- 
-        // tconfirm.setBackground(fieldBg);
-        // tconfirm.setForeground(fg);
-        // tconfirm.setCaretColor(fg);
- 
-        // male.setBackground(bg);
-        // male.setForeground(fg);
-        // female.setBackground(bg);
-        // female.setForeground(fg);
-        // // attackchopper.setForeground(fg);
- 
-        // date.setBackground(fieldBg);
-        // date.setForeground(fg);
-        // month.setBackground(fieldBg);
-        // month.setForeground(fg);
-        // year.setBackground(fieldBg);
-        // year.setForeground(fg);
- 
-        // sub.setBackground(fieldBg);
-        // sub.setForeground(fg);
-        // reset.setBackground(fieldBg);
-        // reset.setForeground(fg);
-
+        
         setVisible(true);
     }
 
@@ -363,16 +317,21 @@ class Registration extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
 
+        // Quits program when the quit button declared above is pressed 
         if (e.getSource() == quit){
             System.exit(0);
         }
 
+
+        // Takes user to login when button is pressed
         if (e.getSource() == log){
             @SuppressWarnings("unused")
             LoginBackend f = new LoginBackend();
             setVisible(false);
         }
 
+        // Checks and verifies if username and password (confirm password and password match too) to let you into program
+        // when clicking submit button 
         if (e.getSource() == sub) {
 
             String username = tusername.getText().trim();
@@ -386,6 +345,7 @@ class Registration extends JFrame implements ActionListener {
                 return;
             }
 
+            // When passwords don't match (confirm and entry)
             if (!password.equals(confirm)) {
                 res.setForeground(Color.RED);
                 res.setText("Passwords do not match.");
@@ -402,6 +362,8 @@ class Registration extends JFrame implements ActionListener {
                 // makes a new user, index is size of userList
                 int n = User.getUserList().size();
                 @SuppressWarnings("unused")
+
+                // New object of user
                 User newUser = new User(username, password, n);
                 OutputXml.saveUsers();
             } 
@@ -411,7 +373,8 @@ class Registration extends JFrame implements ActionListener {
                 res.setText("Error saving user.");
             }
 
-        } else if (e.getSource() == reset) {
+        } 
+        else if (e.getSource() == reset) {
             tusername.setText("");
             tpass.setText("");
             tconfirm.setText("");
@@ -423,7 +386,7 @@ class Registration extends JFrame implements ActionListener {
         }
     }
 
-    // You can test the panel through running this function
+    // You can test the panel through running this function (mainly for debugging purposes)
     public static void main(String[] args) {
         Registration f = new Registration();
     }

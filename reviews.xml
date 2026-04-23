@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <reviews>
     <review>
-        <title>GREAT BAD GAME</title>
-        <description>Catan is a great strategy game but I have no friends to play with.</description>
+        <title>cold</title>
+        <description>frostbite</description>
         <rating>4</rating>
-        <userID>-1</userID>
-        <gameID>13</gameID>
+        <userID>0</userID>
+        <gameID>311988</gameID>
+    </review>
+    <review>
+        <title>sand</title>
+        <description>worm</description>
+        <rating>3</rating>
+        <userID>0</userID>
+        <gameID>316554</gameID>
     </review>
     <review>
         <title>Lets game</title>
@@ -48,12 +55,5 @@
         <rating>3</rating>
         <userID>1</userID>
         <gameID>1406</gameID>
-    </review>
-    <review>
-        <title>Star War</title>
-        <description>It's a star war man!</description>
-        <rating>5</rating>
-        <userID>5</userID>
-        <gameID>374173</gameID>
     </review>
 </reviews>

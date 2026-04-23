@@ -1,33 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
     <user>
-        <username>beans</username>
-        <password>6969</password>
-        <UID>0</UID>
-    </user>
-    <user>
         <username>test</username>
         <password>pass</password>
+        <UID>0</UID>
+        <collections>
+            <collection>
+                <collectionName>mop</collectionName>
+                <games>
+                    <game>1927</game>
+                    <game>41114</game>
+                    <game>5048</game>
+                    <game>1406</game>
+                    <game>320</game>
+                    <game>311988</game>
+                </games>
+            </collection>
+            <collection>
+                <collectionName>beans</collectionName>
+                <games>
+                    <game>312786</game>
+                    <game>312484</game>
+                    <game>2136</game>
+                </games>
+            </collection>
+            <collection>
+                <collectionName>chicken</collectionName>
+                <games>
+                    <game>30549</game>
+                    <game>256568</game>
+                    <game>1294</game>
+                </games>
+            </collection>
+            <collection>
+                <collectionName>michael</collectionName>
+                <games>
+                    <game>146508</game>
+                    <game>277659</game>
+                    <game>1406</game>
+                </games>
+            </collection>
+        </collections>
+    </user>
+    <user>
+        <username>john</username>
+        <password>bean</password>
         <UID>1</UID>
+        <collections>
+            <collection>
+                <collectionName>NEMESIS</collectionName>
+                <games>
+                    <game>167355</game>
+                    <game>231733</game>
+                    <game>2453</game>
+                    <game>374173</game>
+                </games>
+            </collection>
+            <collection>
+                <collectionName>Ark</collectionName>
+                <games>
+                    <game>342942</game>
+                </games>
+            </collection>
+        </collections>
     </user>
     <user>
-        <username>bloo</username>
-        <password>chicken</password>
+        <username>nick</username>
+        <password>zest</password>
         <UID>2</UID>
+        <collections/>
     </user>
     <user>
-        <username>norp</username>
-        <password>gleep</password>
+        <username>zaxby</username>
+        <password>chicken</password>
         <UID>3</UID>
+        <collections>
+            <collection>
+                <collectionName>frozen</collectionName>
+                <games>
+                    <game>167791</game>
+                    <game>2407</game>
+                </games>
+            </collection>
+            <collection>
+                <collectionName>fda</collectionName>
+                <games>
+                    <game>1294</game>
+                    <game>1917</game>
+                </games>
+            </collection>
+            <collection>
+                <collectionName>secret sauce</collectionName>
+                <games>
+                    <game>231733</game>
+                    <game>350205</game>
+                </games>
+            </collection>
+        </collections>
     </user>
     <user>
-        <username>herb</username>
-        <password>bert</password>
+        <username>username</username>
+        <password>password</password>
         <UID>4</UID>
-    </user>
-    <user>
-        <username>nuggett</username>
-        <password>guggett</password>
-        <UID>5</UID>
+        <collections/>
     </user>
 </users>

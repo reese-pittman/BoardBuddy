@@ -28,7 +28,10 @@ public class ProfilePanelUI extends JFrame {
     private Font font;
     private ProfilePanelBackend backend = new ProfilePanelBackend();
 
-
+/**
+ * Opens up the profile panel 
+ * @param currentUser the current user on the system
+ */
     public ProfilePanelUI(User currentUser){
         this.currentUser = currentUser;
        
@@ -40,7 +43,9 @@ public class ProfilePanelUI extends JFrame {
         insideComponents();
     }
 
-
+/**
+ * contains all of the labels, buttons, etc that are on the profile panel
+ */
     public void insideComponents(){
         font = new Font("Arial", Font.BOLD, 40);
         setLayout(new BorderLayout());
@@ -54,7 +59,6 @@ public class ProfilePanelUI extends JFrame {
         collectionButton = new JButton("Collections");
         dashboardButton = new JButton("Dashboard");
         logoutButton = new JButton("Logout");
-
 
         buttonPanel.add(collectionButton, BorderLayout.NORTH);
         buttonPanel.add(dashboardButton);
@@ -115,7 +119,8 @@ public class ProfilePanelUI extends JFrame {
         centerPanel.add(passwordPanel2);
         add(centerPanel, BorderLayout.CENTER);
 //--------------------Event Handlers---------------------------------------//
-    collectionButton.addActionListener(e -> {
+     collectionButton.addActionListener(e -> {
+        // This line causes an issue with searching in your collection, ONLY when going from ProfileUI -> CollectionUI
         backend.openCollections(currentUser.getUsersCollections(), currentUser, this);
     });
    
@@ -123,7 +128,10 @@ public class ProfilePanelUI extends JFrame {
         backend.openDash(currentUser,this);
     });
 
-
+/**
+ * Gets the a new username from the user makes sure it is not empty or the same as their 
+ * current one. Then changes that users username to what they typed in
+ */
     usernameButton.addActionListener(e -> {
         String newUsername = JOptionPane.showInputDialog(this, "Enter new Username");
         if (newUsername != null && !newUsername.isBlank() && !currentUser.getUsername().equals(newUsername)){
@@ -134,12 +142,17 @@ public class ProfilePanelUI extends JFrame {
         }
     });
 
+
+    /**
+     *  Gets the a new password from the user makes sure it is not empty or the same as their 
+     * current one. Then changes that users password to what they typed in. Also hides what the 
+     * user inputs into the box
+     */
     passwordButton.addActionListener(e -> {
         String newPassword = backend.showPasswordDialog();
         if (newPassword != null && !newPassword.isBlank() && !currentUser.getPasswordHash().equals(newPassword)) {
                 currentUser.setPasswordHash(newPassword);
                 passwordLabel.setText("Current Password: " + currentUser.maskPassword(newPassword.length()));
-
 
         }
         else{
@@ -156,8 +169,4 @@ public class ProfilePanelUI extends JFrame {
 
    
     }
-//      public static void main(String[] args) {
-//         User testU = new User("test", "pass", 101010);
-//           new ProfilePanelUI(testU).setVisible(true);
-//       }
 }

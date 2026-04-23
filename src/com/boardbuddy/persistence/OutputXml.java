@@ -12,9 +12,17 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
+
+/**
+ * Public class OutputXml responsible for making and/or writing to reviews.xml and users.xml
+ * which things like registration, login, profile, etc. will need to pull most up to date info on user 
+ * and review details
+ */
 public class OutputXml {
 
+    // Name of where reviews are kept
     private static final String REVIEW_PATH = "reviews.xml";
+    // Name of where users are kept
     private static final String USER_PATH = "users.xml";
 
     /**
@@ -113,6 +121,8 @@ public class OutputXml {
             ArrayList<User> userList = User.getUserList();
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+            // Document object to append to
             Document doc = builder.newDocument();
 
             // Users root dir
@@ -180,7 +190,8 @@ public class OutputXml {
             Transformer transformer = null;
             try {
                 transformer = TransformerFactory.newInstance().newTransformer();
-            } catch (TransformerConfigurationException ex) {
+            } 
+            catch (TransformerConfigurationException ex) {
                 System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
             if (transformer == null) {
@@ -193,10 +204,12 @@ public class OutputXml {
 
             try {
                 transformer.transform(source, result);
-            } catch (TransformerException ex) {
+            } 
+            catch (TransformerException ex) {
                 System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
-        } catch (ParserConfigurationException ex) {
+        } 
+        catch (ParserConfigurationException ex) {
             System.getLogger(OutputXml.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }

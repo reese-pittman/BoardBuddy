@@ -5,6 +5,7 @@ import com.boardbuddy.model.Collection;
 import com.boardbuddy.model.Review;
 import com.boardbuddy.model.User;
 import java.io.File;
+import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -90,7 +91,7 @@ public class InputXml {
             count++;
         }
  
-        System.out.println("Imported " + count + " game(s) into collection \"" + collectionName + "\".");
+        // System.out.println("Imported " + count + " game(s) into collection \"" + collectionName + "\".");
 
         return collection;
     }
@@ -130,14 +131,15 @@ public class InputXml {
      * @param doc
      */
     private static void handleUsers(Document doc) {
+        // Loop through users tag until done
         NodeList userNodes = doc.getElementsByTagName("user");
         int count = 0;
  
         for (int i = 0; i < userNodes.getLength(); i++) {
-            Element el = (Element) userNodes.item(i);
+            Element us = (Element) userNodes.item(i);
  
-            String username = getTextContent(el, "username");
-            String password = getTextContent(el, "password");
+            String username = getTextContent(us, "username");
+            String password = getTextContent(us, "password");
 
             // TODO: hash password before storing in production (this is a maybe, for now it is just a string)
 
@@ -145,14 +147,38 @@ public class InputXml {
             @SuppressWarnings("unused")
             User newUser = new User(username, password, i);
 
-            // TODO: Read collections from file here maybe?
-            String collectionName = getTextContent(el, "collectionName");
-            Collection newCollection = new Collection(collectionName, i);
-            // TODO: Read Game list from file
-            // TODO: Add each game from file to collection
-            newUser.addGameCollection(newCollection);
-            
+            // Loop through collections tag until done, same as users
+            NodeList collectionNodes = us.getElementsByTagName("collection");
+            for (int j = 0; j < collectionNodes.getLength(); j++) {
+                Element col = (Element) collectionNodes.item(j);
 
+                // Reads collection name and makes a new collection with the current uid
+                String collectionName = getTextContent(col, "collectionName");
+                Collection newCollection = new Collection(collectionName, i);
+
+                // Loops through and adds games
+                NodeList gameNodes = col.getElementsByTagName("game");
+                for (int k = 0; k < gameNodes.getLength(); k++) {
+                    // Grabbing the game element and id
+                    Element gam = (Element) gameNodes.item(k);
+                    // int gameID = parseTextContent(gam, "game");
+                    int gameID = Integer.parseInt(gam.getTextContent().trim());
+                    
+                    // Make an ArrayList of all the games to search through and fetch the gameID.
+                    // Then add the game to the new collection.
+                    Collection master = InputXml.parse("bgg90Games.xml", "Master", -1);
+                    ArrayList<BoardGame> masterGameList = master.getGameList();
+                    for (BoardGame game : masterGameList) {
+                        if (game.getId() == gameID) {
+                            newCollection.addGame(game);
+                        }
+                    }
+                }
+                // Add the new collection to the new user after all games are populated
+                newUser.addGameCollection(newCollection);
+
+            }
+            
             // User.addUser(newUser); // This is done in the constructor now 
             count++;
         }

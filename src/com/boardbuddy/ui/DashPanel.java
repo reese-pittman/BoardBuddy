@@ -13,7 +13,7 @@ import javax.swing.*;
 public class DashPanel extends JFrame {
 
     private final Dashboard dashboard;
-    private final ArrayList<BoardGame> allDatabaseGames;
+    final ArrayList<BoardGame> allDatabaseGames;
 
     private JTextField searchField;
     private JButton collectionsButton;
@@ -32,7 +32,7 @@ public class DashPanel extends JFrame {
         // MASTER game collection
         String inputPath = "bgg90Games.xml";
         Collection master = InputXml.parse(inputPath, "Master", -1);
-        //
+    
 
         allDatabaseGames = (master != null) ? master.getGameList() : new ArrayList<>();
 
@@ -49,6 +49,8 @@ public class DashPanel extends JFrame {
         setLayout(new BorderLayout());
 
         // ─── Top Bar ─────────────────────────────────────────────
+        // Adding a drop box to sort though the games 
+        JComboBox<String> sortBox = new JComboBox<>(new String[]{"Default", "Min Players", "Max Players", "Year", "Play Time"});
         JPanel topPanel = new JPanel(new BorderLayout());
 
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -58,13 +60,19 @@ public class DashPanel extends JFrame {
         profileButton = new JButton("Profile");
         // JButton logoutButton = new JButton("Logout");
 
-        topPanel.add(searchField, BorderLayout.CENTER);
+    
+        JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        leftPanel.add(searchField);
+        leftPanel.add(new JLabel("Sort by:"));
+        leftPanel.add(sortBox);
+
+        topPanel.add(leftPanel, BorderLayout.CENTER);
 
         navPanel.add(collectionsButton);
         navPanel.add(profileButton);
-        
         // In the case that we want logout to be on the dashboard
         // navPanel.add(logoutButton);
+
 
         topPanel.add(navPanel, BorderLayout.EAST);
 
@@ -102,7 +110,7 @@ public class DashPanel extends JFrame {
         });
 
         collectionsButton.addActionListener(e -> {
-            new CollectionPanel(dashboard.getUser().getUsersCollections(), dashboard.getUser()).setVisible(true);
+            new CollectionPanel(dashboard.getUser().getUsersCollections(), dashboard.getUser(), dashboard).setVisible(true);
             dispose();
         });
 
@@ -111,9 +119,33 @@ public class DashPanel extends JFrame {
             dispose();
         });
 
-    }
+        // action listner for the drop box
+        sortBox.addActionListener(e ->{ 
+            String Selected = (String) sortBox.getSelectedItem();
+            ArrayList<BoardGame> sorted = new ArrayList<>(allDatabaseGames);
 
-    /**
+            switch (Selected) {
+                case "Min Players":
+                    sorted.sort((a, b) -> a.getMinPlayers() - b.getMinPlayers()); // compares to games at a time
+                    break;
+                case "Max Players":
+                    sorted.sort((a, b) -> a.getMaxPlayers() - b.getMaxPlayers());
+                    break;
+                case "Year":
+                    sorted.sort((a, b) -> a.getYear() - b.getYear());
+                    break;
+                case "Play Time":
+                    sorted.sort((a, b) -> a.getPlayTime() - b.getPlayTime());
+                    break;
+                default:
+                    dashboard.getDashboardGames(allDatabaseGames);
+                    break;
+            }
+            loadGames(sorted);
+        });    
+    }
+  
+     /**
      * Loads the specified list of games into the games panel.
      * @param games The list of games to display.
      */
@@ -129,6 +161,8 @@ public class DashPanel extends JFrame {
 
                 gameButton.addActionListener(e -> {
                     dashboard.onGameSelected(game);
+                    // dispose();
+
                 });
 
                 gamesPanel.add(gameButton);
