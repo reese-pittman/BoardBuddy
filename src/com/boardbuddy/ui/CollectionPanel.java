@@ -23,6 +23,11 @@ public class CollectionPanel extends JFrame {
     private JLabel titleLabel;
     private JPanel gamesPanel;
 
+    /**
+     * Constructor for the CollectionPanel class
+     * @param userCollections The list of collections for the user
+     * @param user The user object
+     */
     public CollectionPanel(ArrayList<Collection> userCollections, User user, Dashboard dashboard) {
         this.userCollections = userCollections;
         this.user = user;
@@ -253,6 +258,10 @@ public class CollectionPanel extends JFrame {
         loadGames(selectedCollection.getGameList());
     }
 
+    /**
+     * Loads the specified list of games into the games panel.
+     * @param games The list of games to display.
+     */
     private void loadGames(ArrayList<BoardGame> games) {
         gamesPanel.removeAll();
 
