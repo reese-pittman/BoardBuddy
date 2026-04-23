@@ -56,4 +56,11 @@
         <userID>1</userID>
         <gameID>1406</gameID>
     </review>
+    <review>
+        <title>fun game</title>
+        <description>very fun</description>
+        <rating>5</rating>
+        <userID>0</userID>
+        <gameID>381247</gameID>
+    </review>
 </reviews>
